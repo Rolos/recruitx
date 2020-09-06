@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App;
 
 class PuestosController extends Controller
 {
@@ -13,7 +14,8 @@ class PuestosController extends Controller
      */
     public function index()
     {
-        //
+        $puestos = App\Puestos::paginate(20);
+        return view('puestos.index', ['puestos' => $puestos]);
     }
 
     /**
@@ -23,7 +25,7 @@ class PuestosController extends Controller
      */
     public function create()
     {
-        //
+        return view('puestos.create');
     }
 
     /**
@@ -34,18 +36,20 @@ class PuestosController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        $request->validate([
+            'nombre' => 'required|string',
+            'nivel_riesgo' => 'required|string|in:alto,medio,bajo',
+            'min_salary' => 'required|numeric|lt:max_salary',
+            'max_salary' => 'required|numeric|gt:min_salary',
+        ]);
+        App\Puestos::create([
+            'nombre' => $request->input('nombre'),
+            'nivel_riesgo' => $request->input('nivel_riesgo'),
+            'salario_minimo' => $request->input('min_salary'),
+            'salario_maximo' => $request->input('max_salary'),
+            'estado' => 'activo',
+        ]);
+        return redirect()->route('puestos.index');
     }
 
     /**
@@ -56,7 +60,8 @@ class PuestosController extends Controller
      */
     public function edit($id)
     {
-        //
+        $puesto = App\Puestos::findOrFail($id);
+        return view('puestos.update', ['puesto' => $puesto]);
     }
 
     /**
@@ -68,7 +73,22 @@ class PuestosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nombre' => 'required|string',
+            'nivel_riesgo' => 'required|string|in:alto,medio,bajo',
+            'min_salary' => 'required|numeric|lt:max_salary',
+            'max_salary' => 'required|numeric|gt:min_salary',
+            'estado' => 'required|in:activo,inactivo',
+        ]);
+        $puesto = App\Puestos::findOrFail($id);
+        $puesto->update([
+            'nombre' => $request->input('nombre'),
+            'nivel_riesgo' => $request->input('nivel_riesgo'),
+            'salario_minimo' => $request->input('min_salary'),
+            'salario_maximo' => $request->input('max_salary'),
+            'estado' => $request->input('estado'),
+        ]);
+        return redirect()->route('puestos.index');
     }
 
     /**
@@ -79,6 +99,8 @@ class PuestosController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $puestos = App\Puestos::findOrFail($id);
+        $puestos->delete();
+        return redirect()->route('puestos.index');
     }
 }

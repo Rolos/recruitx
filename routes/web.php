@@ -26,8 +26,8 @@ Route::resources([
     'puestos' => 'PuestosController',
     'departamentos' => 'DepartamentosController',
     'cniveles' => 'NivelesCapacitacionesController',
+    'empleados' => 'EmpleadosController',
 ]);
 
-Route::get('empleados', function () {
-    return view('index');
-})->name('empleados.index');
+Route::get('/empleados/create/candidate/{candidatoId}', 'EmpleadosController@createFromCandidate')
+    ->name('empleados.create.candidate');

@@ -59,12 +59,13 @@ class CreateInitialDatabase extends Migration
         });
         Schema::create('candidatos', function (Blueprint $table) {
             $table->id();
-            $table->string('cedula');
+            $table->string('cedula')->unique();
             $table->string('nombre');
             $table->unsignedBigInteger('puesto_al_que_aspira_id');
             $table->unsignedBigInteger('departamento_id');
             $table->integer('salario_al_que_aspira');
             $table->string('recomendado_por');
+            $table->boolean('es_empleado')->default(false);
             $table->timestamps();
 
             $table->foreign('puesto_al_que_aspira_id')->references('id')->on('puestos');
@@ -85,7 +86,7 @@ class CreateInitialDatabase extends Migration
         });
         Schema::create('empleados', function (Blueprint $table) {
             $table->id();
-            $table->string('cedula');
+            $table->string('cedula')->unique();
             $table->string('nombre');
             $table->date('fecha_ingreso');
             $table->unsignedBigInteger('departamento_id');

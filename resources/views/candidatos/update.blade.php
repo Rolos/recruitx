@@ -39,6 +39,22 @@
             <label for="recomendado">Recomendado por</label>
             <input id="recomendado" name="recomendado" type="text" class="@error('recomendado') is-invalid @enderror form-control"  value="{{$candidato->recomendado_por}}">
         </div>
+        <div class="form-group">
+            <label for="capacitaciones">Capacitaciones</label>
+            <select id="capacitaciones" class="@error('capacitaciones') is-invalid @enderror custom-select" multiple name="capacitaciones[]">
+                @foreach ($capacitaciones as $capacitacion)
+                    <option value="{{$capacitacion->id}}" @if(in_array($capacitacion->id, $candidato_capacitaciones)) selected @endif>{{$capacitacion->descripcion}}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="competencias">Competencias</label>
+            <select id="competencias" name="competencias[]" class="@error('competencias') is-invalid @enderror custom-select" multiple>
+                @foreach ($competencias as $competencia)
+                    <option value="{{$competencia->id}}" @if(in_array($competencia->id, $candidato_competencias)) selected @endif>{{$competencia->descripcion}}</option>
+                @endforeach
+            </select>
+        </div>
         <button type="submit" class="btn btn-primary">Actualizar</button>
     </form>
 @endsection

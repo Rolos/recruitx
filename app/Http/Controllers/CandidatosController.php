@@ -28,6 +28,8 @@ class CandidatosController extends Controller
         return view('candidatos.create', [
             'puestos' =>  App\Puestos::all(),
             'departamentos' => App\Departamentos::all(),
+            'capacitaciones' => App\Capacitaciones::all(),
+            'competencias' => App\Competencias::all(),
         ]);
     }
 
@@ -46,8 +48,10 @@ class CandidatosController extends Controller
             'departamento' => 'required|exists:departamentos,id',
             'salario' => 'required|numeric',
             'recomendado' => 'required|string',
+            'capacitaciones' => 'required:array',
+            'competencias' => 'required:array'
         ]);
-        App\Candidatos::create([
+        $candidato = App\Candidatos::create([
             'cedula' => $request->input('cedula'),
             'nombre' => $request->input('nombre'),
             'puesto_al_que_aspira_id' => $request->input('puesto'),
@@ -55,6 +59,8 @@ class CandidatosController extends Controller
             'salario_al_que_aspira' => $request->input('salario'),
             'recomendado_por' => $request->input('recomendado'),
         ]);
+        $candidato->competencias()->sync($request->get('competencias'));
+        $candidato->capacitaciones()->sync($request->get('capacitaciones'));
         return redirect()->route('candidatos.index');
     }
 
@@ -67,10 +73,20 @@ class CandidatosController extends Controller
     public function edit($id)
     {
         $candidato = App\Candidatos::findOrFail($id);
+        $candidato_competencias = $candidato->competencias->map(function ($item) {
+            return $item->id;
+        });
+        $candidato_capacitaciones = $candidato->capacitaciones->map(function ($item) {
+            return $item->id;
+        });
         return view('candidatos.update', [
             'candidato' => $candidato,
             'puestos' =>  App\Puestos::all(),
             'departamentos' => App\Departamentos::all(),
+            'capacitaciones' => App\Capacitaciones::all(),
+            'competencias' => App\Competencias::all(),
+            'candidato_competencias' => $candidato_competencias->toArray(),
+            'candidato_capacitaciones' => $candidato_capacitaciones->toArray(),
         ]);
     }
 
@@ -90,6 +106,8 @@ class CandidatosController extends Controller
             'departamento' => 'required|exists:departamentos,id',
             'salario' => 'required|numeric',
             'recomendado' => 'required|string',
+            'capacitaciones' => 'required:array',
+            'competencias' => 'required:array'
         ]);
         $candidato = App\Candidatos::findOrFail($id);
         $candidato->update([
@@ -100,6 +118,8 @@ class CandidatosController extends Controller
             'salario_al_que_aspira' => $request->input('salario'),
             'recomendado_por' => $request->input('recomendado'),
         ]);
+        $candidato->competencias()->sync($request->get('competencias'));
+        $candidato->capacitaciones()->sync($request->get('capacitaciones'));
         return redirect()->route('candidatos.index');
     }
 

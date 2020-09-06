@@ -29,11 +29,11 @@ class Candidatos extends Model
 
     public function competencias()
     {
-        return $this->belongsToMany('App\Competencias', ' competencias_candidatos', 'candidato_id', 'competencia_id');
+        return $this->belongsToMany('App\Competencias', 'competencias_candidatos', 'candidato_id', 'competencia_id');
     }
 
     public function capacitaciones()
     {
-        return $this->belongsToMany('App\Capacitaciones', ' capacitaciones_candidatos', 'candidato_id', 'capacitacion_id');
+        return $this->belongsToMany('App\Capacitaciones', 'capacitaciones_candidatos', 'candidato_id', 'capacitacion_id');
     }
 }

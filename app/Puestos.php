@@ -9,13 +9,8 @@ class Puestos extends Model
     protected $table = 'puestos';
 
     protected $fillable = [
-        'nombre', 'nivel_riesgo_id', 'salario_minimo', 'salario_maximo', 'estado'
+        'nombre', 'nivel_riesgo', 'salario_minimo', 'salario_maximo', 'estado'
     ];
-
-    public function nivelesDeRiesgo()
-    {
-        return $this->belongsTo('App\NivelesRiesgos', 'nivel_riesgo_id');
-    }
 
     public function candidatos()
     {

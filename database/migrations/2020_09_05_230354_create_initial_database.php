@@ -37,6 +37,15 @@ class CreateInitialDatabase extends Migration
             $table->string('descripcion')->nullable();
             $table->timestamps();
         });
+        Schema::create('puestos', function (Blueprint $table) {
+            $table->id();
+            $table->string('nombre');
+            $table->string('nivel_riesgo');
+            $table->integer('salario_minimo');
+            $table->integer('salario_maximo');
+            $table->string('estado');
+            $table->timestamps();
+        });
         Schema::create('capacitaciones', function (Blueprint $table) {
             $table->id();
             $table->string('descripcion');
@@ -47,23 +56,6 @@ class CreateInitialDatabase extends Migration
             $table->timestamps();
 
             $table->foreign('nivel_id')->references('id')->on('niveles_capacitaciones');
-        });
-        Schema::create('niveles_riesgos', function (Blueprint $table) {
-            $table->id();
-            $table->string('nombre');
-            $table->string('descripcion')->nullable();
-            $table->timestamps();
-        });
-        Schema::create('puestos', function (Blueprint $table) {
-            $table->id();
-            $table->string('nombre');
-            $table->unsignedBigInteger('nivel_riesgo_id');
-            $table->integer('salario_minimo');
-            $table->integer('salario_maximo');
-            $table->string('estado');
-            $table->timestamps();
-
-            $table->foreign('nivel_riesgo_id')->references('id')->on('niveles_riesgos');
         });
         Schema::create('candidatos', function (Blueprint $table) {
             $table->id();
@@ -142,7 +134,6 @@ class CreateInitialDatabase extends Migration
         Schema::dropIfExists('experiencia_laboral');
         Schema::dropIfExists('candidatos');
         Schema::dropIfExists('puestos');
-        Schema::dropIfExists('niveles_riesgos');
         Schema::dropIfExists('competencias');
         Schema::dropIfExists('idiomas');
         Schema::dropIfExists('departamentos');

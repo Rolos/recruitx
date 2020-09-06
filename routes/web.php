@@ -15,13 +15,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('index');
-});
+})->name('index');
 
 Route::resources([
     'candidatos' => 'CandidatosController',
     'capacitaciones' => 'CapacitacionesController',
     'competencias' => 'CompetenciasController',
-    'experiencia' => 'ExperienciaController',
+    'experiencia' => 'ExperienciaLaboralController',
     'idiomas' => 'IdiomasController',
     'puestos' => 'PuestosController',
 ]);
+
+Route::get('empleados', function () {
+    return view('index');
+})->name('empleados.index');

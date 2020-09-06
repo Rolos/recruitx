@@ -54,6 +54,14 @@
                 @endforeach
             </select>
         </div>
+        <div class="form-group">
+            <label for="idiomas">Idiomas</label>
+            <select id="idiomas" name="idiomas[]" class="@error('idiomas') is-invalid @enderror custom-select" multiple>
+                @foreach ($idiomas as $idioma)
+                    <option value="{{$idioma->id}}">{{$idioma->nombre}}</option>
+                @endforeach
+            </select>
+        </div>
         <button type="submit" class="btn btn-primary">Crear</button>
     </form>
 @endsection

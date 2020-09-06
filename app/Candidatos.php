@@ -36,4 +36,9 @@ class Candidatos extends Model
     {
         return $this->belongsToMany('App\Capacitaciones', 'capacitaciones_candidatos', 'candidato_id', 'capacitacion_id');
     }
+
+    public function idiomas()
+    {
+        return $this->belongsToMany('App\Idiomas', 'candidatos_idiomas', 'candidato_id', 'idioma_id');
+    }
 }

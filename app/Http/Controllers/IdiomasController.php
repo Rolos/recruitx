@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App;
 
 class IdiomasController extends Controller
 {
@@ -13,7 +14,8 @@ class IdiomasController extends Controller
      */
     public function index()
     {
-        //
+        $idiomas = App\Idiomas::paginate(20);
+        return view('idiomas.index', ['idiomas' => $idiomas]);
     }
 
     /**
@@ -23,7 +25,7 @@ class IdiomasController extends Controller
      */
     public function create()
     {
-        //
+        return view('idiomas.create');
     }
 
     /**
@@ -34,18 +36,14 @@ class IdiomasController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        $request->validate([
+            'nombre' => 'required|string',
+        ]);
+        App\Idiomas::create([
+            'nombre' => $request->input('nombre'),
+            'estado' => 'activo',
+        ]);
+        return redirect()->route('idiomas.index');
     }
 
     /**
@@ -56,7 +54,8 @@ class IdiomasController extends Controller
      */
     public function edit($id)
     {
-        //
+        $idioma = App\Idiomas::findOrFail($id);
+        return view('idiomas.update', ['idioma' => $idioma]);
     }
 
     /**
@@ -68,7 +67,16 @@ class IdiomasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'estado' => 'required|string',
+            'nombre' => 'required|string',
+        ]);
+        $idiomas = App\Idiomas::findOrFail($id);
+        $idiomas->update([
+            'estado' => $request->input('estado'),
+            'nombre' => $request->input('nombre'),
+        ]);
+        return redirect()->route('idiomas.index');
     }
 
     /**
@@ -79,6 +87,8 @@ class IdiomasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $idiomas = App\Idiomas::findOrFail($id);
+        $idiomas->delete();
+        return redirect()->route('idiomas.index');
     }
 }

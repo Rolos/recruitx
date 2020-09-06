@@ -16,3 +16,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resources([
+    'candidatos' => 'CandidatosController',
+    'capacitaciones' => 'CapacitacionesController',
+    'competencias' => 'CompetenciasController',
+    'experiencia' => 'ExperienciaController',
+    'idiomas' => 'IdiomasController',
+    'puestos' => 'PuestosController',
+]);

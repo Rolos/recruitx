@@ -21,6 +21,7 @@
                         <a class="nav-item nav-link" href="{{route('puestos.index')}}">Puestos</a>
                         <a class="nav-item nav-link" href="{{route('empleados.index')}}">Empleados</a>
                         <a class="nav-item nav-link" href="{{route('competencias.index')}}">Competencias</a>
+                        <a class="nav-item nav-link" href="{{route('cniveles.index')}}">Niveles de Capacitaciones</a>
                         <a class="nav-item nav-link" href="{{route('capacitaciones.index')}}">Capacitaciones</a>
                         <a class="nav-item nav-link" href="{{route('idiomas.index')}}">Idiomas</a>
                         <a class="nav-item nav-link" href="{{route('departamentos.index')}}">Departamentos</a>

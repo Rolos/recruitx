@@ -25,6 +25,7 @@ Route::resources([
     'idiomas' => 'IdiomasController',
     'puestos' => 'PuestosController',
     'departamentos' => 'DepartamentosController',
+    'cniveles' => 'NivelesCapacitacionesController',
 ]);
 
 Route::get('empleados', function () {

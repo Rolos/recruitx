@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App;
 
 class CompetenciasController extends Controller
 {
@@ -13,7 +14,8 @@ class CompetenciasController extends Controller
      */
     public function index()
     {
-        //
+        $competencias = App\Competencias::paginate(20);
+        return view('competencias.index', ['competencias' => $competencias]);
     }
 
     /**
@@ -23,7 +25,7 @@ class CompetenciasController extends Controller
      */
     public function create()
     {
-        //
+        return view('competencias.create');
     }
 
     /**
@@ -34,18 +36,14 @@ class CompetenciasController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        $request->validate([
+            'descripcion' => 'required|string',
+        ]);
+        App\Competencias::create([
+            'descripcion' => $request->input('descripcion'),
+            'estado' => 'activo',
+        ]);
+        return redirect()->route('competencias.index');
     }
 
     /**
@@ -56,7 +54,8 @@ class CompetenciasController extends Controller
      */
     public function edit($id)
     {
-        //
+        $competencias = App\Competencias::findOrFail($id);
+        return view('competencias.update', ['competencia' => $competencias]);
     }
 
     /**
@@ -68,7 +67,16 @@ class CompetenciasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'estado' => 'required|string',
+            'descripcion' => 'required|string',
+        ]);
+        $competencia = App\Competencias::findOrFail($id);
+        $competencia->update([
+            'estado' => $request->input('estado'),
+            'descripcion' => $request->input('descripcion'),
+        ]);
+        return redirect()->route('competencias.index');
     }
 
     /**
@@ -79,6 +87,8 @@ class CompetenciasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $competencias = App\Competencias::findOrFail($id);
+        $competencias->delete();
+        return redirect()->route('competencias.index');
     }
 }

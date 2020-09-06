@@ -24,6 +24,7 @@ Route::resources([
     'experiencia' => 'ExperienciaLaboralController',
     'idiomas' => 'IdiomasController',
     'puestos' => 'PuestosController',
+    'departamentos' => 'DepartamentosController',
 ]);
 
 Route::get('empleados', function () {

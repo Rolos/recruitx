@@ -61,14 +61,13 @@ class CreateInitialDatabase extends Migration
             $table->id();
             $table->string('cedula')->unique();
             $table->string('nombre');
-            $table->unsignedBigInteger('puesto_al_que_aspira_id');
+            $table->integer('telefono');
             $table->unsignedBigInteger('departamento_id');
             $table->integer('salario_al_que_aspira');
             $table->string('recomendado_por');
             $table->boolean('es_empleado')->default(false);
             $table->timestamps();
 
-            $table->foreign('puesto_al_que_aspira_id')->references('id')->on('puestos');
             $table->foreign('departamento_id')->references('id')->on('departamentos');
         });
         Schema::create('experiencia_laboral', function (Blueprint $table) {
@@ -118,6 +117,24 @@ class CreateInitialDatabase extends Migration
             $table->foreign('candidato_id')->references('id')->on('candidatos');
             $table->foreign('capacitacion_id')->references('id')->on('capacitaciones');
         });
+        Schema::create('candidatos_idiomas', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('candidato_id');
+            $table->unsignedBigInteger('idioma_id');
+            $table->timestamps();
+
+            $table->foreign('candidato_id')->references('id')->on('candidatos');
+            $table->foreign('idioma_id')->references('id')->on('idiomas');
+        });
+        Schema::create('candidatos_puestos', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('candidato_id');
+            $table->unsignedBigInteger('puesto_id');
+            $table->timestamps();
+
+            $table->foreign('candidato_id')->references('id')->on('candidatos');
+            $table->foreign('puesto_id')->references('id')->on('puestos');
+        });
     }
 
     /**
@@ -129,6 +146,8 @@ class CreateInitialDatabase extends Migration
     {
         Schema::dropIfExists('competencias_candidatos');
         Schema::dropIfExists('capacitaciones_candidatos');
+        Schema::dropIfExists('candidatos_idiomas');
+        Schema::dropIfExists('candidatos_puestos');
         Schema::dropIfExists('empleados');
         Schema::dropIfExists('capacitaciones');
         Schema::dropIfExists('niveles_capacitaciones');

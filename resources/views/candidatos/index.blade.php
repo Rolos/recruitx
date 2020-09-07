@@ -9,7 +9,7 @@
         <tr>
             <th scope="col">Cedula</th>
             <th scope="col">Nombre</th>
-            <th scope="col">Puesto al que aspira</th>
+            <th scope="col">Telefono</th>
             <th scope="col">Departamento</th>
             <th scope="col">Salario al que aspira</th>
             <th scope="col">Recomendado por</th>
@@ -23,7 +23,7 @@
             <tr>
                 <th scope="row">{{ $candidato->cedula }}</th>
                 <td>{{ $candidato->nombre }}</td>
-                <td>{{ $candidato->puestoAlQueAspira->nombre }}</td>
+                <td>{{ $candidato->telefono }}</td>
                 <td>{{ $candidato->departamento->nombre }}</td>
                 <td>{{ $candidato->salario_al_que_aspira }}</td>
                 <td>{{ $candidato->recomendado_por }}</td>

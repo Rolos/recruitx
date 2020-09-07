@@ -45,18 +45,18 @@ class CandidatosController extends Controller
         $request->validate([
             'cedula' => 'required|string|size:11',
             'nombre' => 'required|string',
-            'puesto' => 'required|exists:puestos,id',
             'departamento' => 'required|exists:departamentos,id',
             'salario' => 'required|numeric',
             'recomendado' => 'required|string',
             'capacitaciones' => 'required:array',
             'competencias' => 'required:array',
             'idiomas' => 'required:array',
+            'telefono' => 'required|numeric|size:10'
         ]);
         $candidato = App\Candidatos::create([
             'cedula' => $request->input('cedula'),
             'nombre' => $request->input('nombre'),
-            'puesto_al_que_aspira_id' => $request->input('puesto'),
+            'telefono' => $request->input('telefono'),
             'departamento_id' => $request->input('departamento'),
             'salario_al_que_aspira' => $request->input('salario'),
             'recomendado_por' => $request->input('recomendado'),
@@ -120,12 +120,13 @@ class CandidatosController extends Controller
             'capacitaciones' => 'required:array',
             'competencias' => 'required:array',
             'idiomas' => 'required:array',
+            'telefono' => 'required|numeric|size:10',
         ]);
         $candidato = App\Candidatos::findOrFail($id);
         $candidato->update([
             'cedula' => $request->input('cedula'),
             'nombre' => $request->input('nombre'),
-            'puesto_al_que_aspira_id' => $request->input('puesto'),
+            'telefono' => $request->input('telefono'),
             'departamento_id' => $request->input('departamento'),
             'salario_al_que_aspira' => $request->input('salario'),
             'recomendado_por' => $request->input('recomendado'),

@@ -15,12 +15,8 @@
             <input id="nombre" name="nombre" type="text" class="@error('nombre') is-invalid @enderror form-control">
         </div>
         <div class="form-group">
-            <label for="puesto">Puesto al que aspira</label>
-            <select id="puesto" name="puesto" class="@error('puesto') is-invalid @enderror custom-select">
-                @foreach ($puestos as $puesto)
-                    <option value="{{$puesto->id}}">{{$puesto->nombre}}</option>
-                @endforeach
-            </select>
+            <label for="telefono">Tel&eacute;fono</label>
+            <input id="telefono" name="telefono" type="number" class="@error('telefono') is-invalid @enderror form-control">
         </div>
         <div class="form-group">
             <label for="departamento">Departamento</label>

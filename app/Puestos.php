@@ -12,13 +12,13 @@ class Puestos extends Model
         'nombre', 'nivel_riesgo', 'salario_minimo', 'salario_maximo', 'estado'
     ];
 
-    public function candidatos()
-    {
-        return $this->hasMany('App\Candidatos', 'puesto_al_que_aspira_id');
-    }
-
     public function empleados()
     {
         return $this->hasMany('App\Empleados', 'puesto_id');
+    }
+
+    public function candidatos()
+    {
+        return $this->belongsToMany('App\Candidatos', 'candidatos_puestos', 'puesto_id', 'candidato_id');
     }
 }

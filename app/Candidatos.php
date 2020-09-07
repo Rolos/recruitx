@@ -9,13 +9,8 @@ class Candidatos extends Model
     protected $table = 'candidatos';
 
     protected $fillable = [
-        'cedula', 'nombre', 'puesto_al_que_aspira_id', 'departamento_id', 'salario_al_que_aspira', 'recomendado_por'
+        'cedula', 'nombre', 'departamento_id', 'salario_al_que_aspira', 'recomendado_por'
     ];
-
-    public function puestoAlQueAspira()
-    {
-        return $this->belongsTo('App\Puestos', 'puesto_al_que_aspira_id');
-    }
 
     public function departamento()
     {
@@ -40,5 +35,10 @@ class Candidatos extends Model
     public function idiomas()
     {
         return $this->belongsToMany('App\Idiomas', 'candidatos_idiomas', 'candidato_id', 'idioma_id');
+    }
+
+    public function puestos()
+    {
+        return $this->belongsToMany('App\Puestos', 'candidatos_puestos', 'candidato_id', 'puesto_id');
     }
 }

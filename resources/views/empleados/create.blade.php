@@ -32,7 +32,7 @@
             <label for="puesto">Puesto</label>
             <select id="puesto" name="puesto" class="@error('puesto') is-invalid @enderror custom-select">
                 @foreach ($puestos as $puesto)
-                    <option value="{{$puesto->id}}" @if(isset($candidato) && $candidato->puestoAlQueAspira->id == $puesto->id) selected @endif>
+                    <option value="{{$puesto->id}}" @if(isset($puestoId) && $puestoId == $puesto->id) selected @endif>
                         {{$puesto->nombre}}
                     </option>
                 @endforeach

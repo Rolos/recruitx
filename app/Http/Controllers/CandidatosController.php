@@ -64,6 +64,9 @@ class CandidatosController extends Controller
         $candidato->competencias()->sync($request->get('competencias'));
         $candidato->capacitaciones()->sync($request->get('capacitaciones'));
         $candidato->idiomas()->sync($request->get('idiomas'));
+        if ($request->has('crear_y_experiencia')) {
+            return redirect()->route('candidates.experience.add', ['id' => $candidato->id]);
+        }
         return redirect()->route('candidatos.index');
     }
 

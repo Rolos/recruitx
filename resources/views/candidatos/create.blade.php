@@ -62,7 +62,7 @@
                 @endforeach
             </select>
         </div>
-        @include('includes.experiencias')
-        <button type="submit" class="btn btn-primary">Crear</button>
+        <button type="submit" name="crear" class="btn btn-primary">Crear</button>
+        <button type="submit" name="crear_y_experiencia" class="btn btn-secondary">Crear y agregar experiencia</button>
     </form>
 @endsection

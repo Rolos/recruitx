@@ -61,7 +61,7 @@ class CreateInitialDatabase extends Migration
             $table->id();
             $table->string('cedula')->unique();
             $table->string('nombre');
-            $table->integer('telefono');
+            $table->string('telefono');
             $table->unsignedBigInteger('departamento_id');
             $table->integer('salario_al_que_aspira');
             $table->string('recomendado_por');

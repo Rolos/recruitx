@@ -36,28 +36,52 @@
             <input id="recomendado" name="recomendado" type="text" class="@error('recomendado') is-invalid @enderror form-control"  value="{{$candidato->recomendado_por}}">
         </div>
         <div class="form-group">
-            <label for="capacitaciones">Capacitaciones</label>
-            <select id="capacitaciones" class="@error('capacitaciones') is-invalid @enderror custom-select" multiple name="capacitaciones[]">
-                @foreach ($capacitaciones as $capacitacion)
-                    <option value="{{$capacitacion->id}}" @if(in_array($capacitacion->id, $candidato_capacitaciones)) selected @endif>{{$capacitacion->descripcion}}</option>
-                @endforeach
-            </select>
+            <h4>Capacitaciones</h4>
+            @foreach ($capacitaciones as $capacitacion)
+                <div class="form-check form-check-inline">
+                    <input
+                            class="form-check-input @error('capacitaciones') is-invalid @enderror"
+                            type="checkbox"
+                            id="capacitacion{{$capacitacion->id}}"
+                            value="{{$capacitacion->id}}"
+                            name="capacitaciones[]"
+                            @if(in_array($capacitacion->id, $candidato_capacitaciones)) checked @endif
+                    >
+                    <label class="form-check-label" for="capacitacion{{$capacitacion->id}}">{{$capacitacion->descripcion}}</label>
+                </div>
+            @endforeach
         </div>
         <div class="form-group">
-            <label for="competencias">Competencias</label>
-            <select id="competencias" name="competencias[]" class="@error('competencias') is-invalid @enderror custom-select" multiple>
-                @foreach ($competencias as $competencia)
-                    <option value="{{$competencia->id}}" @if(in_array($competencia->id, $candidato_competencias)) selected @endif>{{$competencia->descripcion}}</option>
-                @endforeach
-            </select>
+            <h4>Competencias</h4>
+            @foreach ($competencias as $competencia)
+                <div class="form-check form-check-inline">
+                    <input
+                            class="form-check-input @error('competencias') is-invalid @enderror"
+                            type="checkbox"
+                            id="competencias{{$competencia->id}}"
+                            value="{{$competencia->id}}"
+                            name="competencias[]"
+                            @if(in_array($competencia->id, $candidato_competencias)) checked @endif
+                    >
+                    <label class="form-check-label" for="competencias{{$competencia->id}}">{{$competencia->descripcion}}</label>
+                </div>
+            @endforeach
         </div>
         <div class="form-group">
-            <label for="idiomas">Idiomas</label>
-            <select id="idiomas" name="idiomas[]" class="@error('idiomas') is-invalid @enderror custom-select" multiple>
-                @foreach ($idiomas as $idioma)
-                    <option value="{{$idioma->id}}" @if(in_array($idioma->id, $candidato_idiomas)) selected @endif>{{$idioma->nombre}}</option>
-                @endforeach
-            </select>
+            <h4>Idiomas</h4>
+            @foreach ($idiomas as $idioma)
+                <div class="form-check form-check-inline">
+                    <input
+                            class="form-check-input @error('idiomas') is-invalid @enderror"
+                            type="checkbox"
+                            id="idiomas{{$idioma->id}}"
+                            value="{{$idioma->id}}"
+                            name="idiomas[]"
+                            @if(in_array($idioma->id, $candidato_idiomas)) checked @endif
+                    >
+                    <label class="form-check-label" for="idiomas{{$idioma->id}}">{{$idioma->nombre}}</label>
+                </div>
+            @endforeach
         </div>
         @include('includes.experiencias')
         <button type="submit" class="btn btn-primary">Actualizar</button>

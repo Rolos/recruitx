@@ -9,7 +9,7 @@ class Candidatos extends Model
     protected $table = 'candidatos';
 
     protected $fillable = [
-        'cedula', 'nombre', 'departamento_id', 'salario_al_que_aspira', 'recomendado_por'
+        'cedula', 'nombre', 'telefono', 'departamento_id', 'salario_al_que_aspira', 'recomendado_por'
     ];
 
     public function departamento()

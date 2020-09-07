@@ -51,7 +51,7 @@ class CandidatosController extends Controller
             'capacitaciones' => 'required:array',
             'competencias' => 'required:array',
             'idiomas' => 'required:array',
-            'telefono' => 'required|numeric|size:10'
+            'telefono' => 'required|numeric'
         ]);
         $candidato = App\Candidatos::create([
             'cedula' => $request->input('cedula'),
@@ -113,14 +113,13 @@ class CandidatosController extends Controller
         $request->validate([
             'cedula' => 'required|string|size:11',
             'nombre' => 'required|string',
-            'puesto' => 'required|exists:puestos,id',
             'departamento' => 'required|exists:departamentos,id',
             'salario' => 'required|numeric',
             'recomendado' => 'required|string',
             'capacitaciones' => 'required:array',
             'competencias' => 'required:array',
             'idiomas' => 'required:array',
-            'telefono' => 'required|numeric|size:10',
+            'telefono' => 'required|numeric',
         ]);
         $candidato = App\Candidatos::findOrFail($id);
         $candidato->update([

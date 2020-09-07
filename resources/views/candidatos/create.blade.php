@@ -35,28 +35,49 @@
             <input id="recomendado" name="recomendado" type="text" class="@error('recomendado') is-invalid @enderror form-control">
         </div>
         <div class="form-group">
-            <label for="capacitaciones">Capacitaciones</label>
-            <select id="capacitaciones" class="@error('capacitaciones') is-invalid @enderror custom-select" multiple name="capacitaciones[]">
-                @foreach ($capacitaciones as $capacitacion)
-                    <option value="{{$capacitacion->id}}">{{$capacitacion->descripcion}}</option>
-                @endforeach
-            </select>
+            <h4>Capacitaciones</h4>
+            @foreach ($capacitaciones as $capacitacion)
+                <div class="form-check form-check-inline">
+                    <input
+                        class="form-check-input @error('capacitaciones') is-invalid @enderror"
+                        type="checkbox"
+                        id="capacitacion{{$capacitacion->id}}"
+                        value="{{$capacitacion->id}}"
+                        name="capacitaciones[]"
+                    >
+                    <label class="form-check-label" for="capacitacion{{$capacitacion->id}}">{{$capacitacion->descripcion}}</label>
+                </div>
+            @endforeach
         </div>
         <div class="form-group">
-            <label for="competencias">Competencias</label>
-            <select id="competencias" name="competencias[]" class="@error('competencias') is-invalid @enderror custom-select" multiple>
-                @foreach ($competencias as $competencia)
-                    <option value="{{$competencia->id}}">{{$competencia->descripcion}}</option>
-                @endforeach
-            </select>
+            <h4>Competencias</h4>
+            @foreach ($competencias as $competencia)
+                <div class="form-check form-check-inline">
+                    <input
+                        class="form-check-input @error('competencias') is-invalid @enderror"
+                        type="checkbox"
+                        id="competencias{{$competencia->id}}"
+                        value="{{$competencia->id}}"
+                        name="competencias[]"
+                    >
+                    <label class="form-check-label" for="competencias{{$competencia->id}}">{{$competencia->descripcion}}</label>
+                </div>
+            @endforeach
         </div>
         <div class="form-group">
-            <label for="idiomas">Idiomas</label>
-            <select id="idiomas" name="idiomas[]" class="@error('idiomas') is-invalid @enderror custom-select" multiple>
-                @foreach ($idiomas as $idioma)
-                    <option value="{{$idioma->id}}">{{$idioma->nombre}}</option>
-                @endforeach
-            </select>
+            <h4>Idiomas</h4>
+            @foreach ($idiomas as $idioma)
+                <div class="form-check form-check-inline">
+                    <input
+                        class="form-check-input @error('idiomas') is-invalid @enderror"
+                        type="checkbox"
+                        id="idiomas{{$idioma->id}}"
+                        value="{{$idioma->id}}"
+                        name="idiomas[]"
+                    >
+                    <label class="form-check-label" for="idiomas{{$idioma->id}}">{{$idioma->nombre}}</label>
+                </div>
+            @endforeach
         </div>
         <button type="submit" name="crear" class="btn btn-primary">Crear</button>
         <button type="submit" name="crear_y_experiencia" class="btn btn-secondary">Crear y agregar experiencia</button>

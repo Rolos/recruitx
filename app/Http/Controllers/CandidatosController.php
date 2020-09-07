@@ -145,4 +145,72 @@ class CandidatosController extends Controller
         $candidatos->delete();
         return redirect()->route('candidatos.index');
     }
+
+    public function addExperience($id)
+    {
+        $candidato = App\Candidatos::findOrFail($id);
+        return view('candidatos.create_experience', [
+            'candidato' => $candidato,
+            'puestos' =>  App\Puestos::all(),
+        ]);
+    }
+
+    public function storeExperience(Request $request, $id)
+    {
+        $request->validate([
+            'empresa' => 'required|string',
+            'puesto_ocupado' => 'required|exists:puestos,id',
+            'fecha_desde' => 'required|date',
+            'fecha_hasta' => 'required|date|after:fecha_desde',
+            'salario' => 'required|numeric',
+        ]);
+        App\ExperienciaLaboral::create([
+            'candidato_id' => $id,
+            'empresa' => $request->input('empresa'),
+            'puesto_ocupado_id' => $request->input('puesto_ocupado'),
+            'fecha_desde' => $request->input('fecha_desde'),
+            'fecha_hasta' => $request->input('fecha_hasta'),
+            'salario' => $request->input('salario'),
+        ]);
+        return redirect()->route('candidatos.edit', ['candidato' => $id]);
+    }
+
+    public function removeExperience($id, $experienceId)
+    {
+        $experiencia = App\ExperienciaLaboral::findOrFail($experienceId);
+        $experiencia->delete();
+        return redirect()->route('candidatos.edit', ['candidato' => $id]);
+    }
+
+    public function editExperience($id, $experienceId)
+    {
+        $candidato = App\Candidatos::findOrFail($id);
+        $experience = App\ExperienciaLaboral::findOrFail($experienceId);
+        return view('candidatos.update_experience', [
+            'candidato' => $candidato,
+            'puestos' =>  App\Puestos::all(),
+            'experiencia' => $experience,
+        ]);
+    }
+
+    public function updateExperience(Request $request, $id, $experienceId)
+    {
+        $request->validate([
+            'empresa' => 'required|string',
+            'puesto_ocupado' => 'required|exists:puestos,id',
+            'fecha_desde' => 'required|date',
+            'fecha_hasta' => 'required|date|after:fecha_desde',
+            'salario' => 'required|numeric',
+        ]);
+        $experiencia = App\ExperienciaLaboral::findOrFail($experienceId);
+        $experiencia->update([
+            'candidato_id' => $id,
+            'empresa' => $request->input('empresa'),
+            'puesto_ocupado_id' => $request->input('puesto_ocupado'),
+            'fecha_desde' => $request->input('fecha_desde'),
+            'fecha_hasta' => $request->input('fecha_hasta'),
+            'salario' => $request->input('salario'),
+        ]);
+        return redirect()->route('candidatos.edit', ['candidato' => $id]);
+    }
 }

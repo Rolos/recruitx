@@ -31,3 +31,18 @@ Route::resources([
 
 Route::get('/empleados/create/candidate/{candidatoId}', 'EmpleadosController@createFromCandidate')
     ->name('empleados.create.candidate');
+
+Route::get('/candidates/{id}/experience', 'CandidatosController@addExperience')
+    ->name('candidates.experience.add');
+
+Route::post('/candidates/{id}/experience', 'CandidatosController@storeExperience')
+    ->name('candidates.experience.store');
+
+Route::delete('/candidates/{id}/experience/{experienceId}', 'CandidatosController@removeExperience')
+    ->name('candidates.experience.remove');
+
+Route::get('/candidates/{id}/experience/{experienceId}', 'CandidatosController@editExperience')
+    ->name('candidates.experience.edit');
+
+Route::put('/candidates/{id}/experience/{experienceId}', 'CandidatosController@updateExperience')
+    ->name('candidates.experience.update');

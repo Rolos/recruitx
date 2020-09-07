@@ -63,6 +63,7 @@
                 @endforeach
             </select>
         </div>
+        @include('includes.experiencias')
         <button type="submit" class="btn btn-primary">Actualizar</button>
     </form>
 @endsection

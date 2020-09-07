@@ -126,5 +126,46 @@ class DatabaseSeeder extends Seeder
             $capacitacion['nivel_id'] = $nivel->id;
             App\Capacitaciones::create($capacitacion);
         }
+
+        $puestos = [
+            [
+                'nombre' => 'Limpiador de ventanas',
+                'nivel_riesgo' => 'alto',
+                'salario_minimo' => 15000,
+                'salario_maximo' => 25000,
+                'estado' => 'activo',
+            ],
+            [
+                'nombre' => 'Trapeador de pisos',
+                'nivel_riesgo' => 'medio',
+                'salario_minimo' => 15000,
+                'salario_maximo' => 25000,
+                'estado' => 'activo',
+            ],
+            [
+                'nombre' => 'Negociador',
+                'nivel_riesgo' => 'alto',
+                'salario_minimo' => 65000,
+                'salario_maximo' => 125000,
+                'estado' => 'activo',
+            ],
+            [
+                'nombre' => 'Programador',
+                'nivel_riesgo' => 'bajo',
+                'salario_minimo' => 55000,
+                'salario_maximo' => 125000,
+                'estado' => 'activo',
+            ],
+            [
+                'nombre' => 'Ingeniero',
+                'nivel_riesgo' => 'alto',
+                'salario_minimo' => 115000,
+                'salario_maximo' => 225000,
+                'estado' => 'activo',
+            ],
+        ];
+        foreach ($puestos as $puesto) {
+            App\Puestos::create($puesto);
+        }
     }
 }

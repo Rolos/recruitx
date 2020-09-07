@@ -46,3 +46,9 @@ Route::get('/candidates/{id}/experience/{experienceId}', 'CandidatosController@e
 
 Route::put('/candidates/{id}/experience/{experienceId}', 'CandidatosController@updateExperience')
     ->name('candidates.experience.update');
+
+Route::get('/candidates/{id}/puesto/{puestoId}', 'CandidatosController@aplicarPuesto')
+    ->name('candidates.position.apply');
+
+Route::get('/candidates/{id}/puesto/{puestoId}/remover', 'CandidatosController@removerPuesto')
+    ->name('candidates.position.remove');

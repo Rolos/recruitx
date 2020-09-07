@@ -216,4 +216,16 @@ class CandidatosController extends Controller
         ]);
         return redirect()->route('candidatos.edit', ['candidato' => $id]);
     }
+
+    public function aplicarPuesto($id, $puestoId)
+    {
+        $candidato = App\Candidatos::findOrFail($id);
+        $candidato->puestos()->attach($puestoId);
+    }
+
+    public function removerPuesto($id, $puestoId)
+    {
+        $candidato = App\Candidatos::findOrFail($id);
+        $candidato->puestos()->detach($puestoId);
+    }
 }

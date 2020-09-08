@@ -7,6 +7,11 @@ use App;
 
 class DepartamentosController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,6 +19,7 @@ class DepartamentosController extends Controller
      */
     public function index()
     {
+        Gate::authorize('admin-stuff');
         $departamentos = App\Departamentos::paginate(20);
         return view('departamentos.index', ['departamentos' => $departamentos]);
     }
@@ -25,6 +31,7 @@ class DepartamentosController extends Controller
      */
     public function create()
     {
+        Gate::authorize('admin-stuff');
         return view('departamentos.create');
     }
 
@@ -36,6 +43,7 @@ class DepartamentosController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('admin-stuff');
         $request->validate([
             'nombre' => 'required|string',
             'descripcion' => 'nullable|string',
@@ -55,6 +63,7 @@ class DepartamentosController extends Controller
      */
     public function edit($id)
     {
+        Gate::authorize('admin-stuff');
         $departamento = App\Departamentos::findOrFail($id);
         return view('departamentos.update', ['departamento' => $departamento]);
     }
@@ -68,6 +77,7 @@ class DepartamentosController extends Controller
      */
     public function update(Request $request, $id)
     {
+        Gate::authorize('admin-stuff');
         $request->validate([
             'nombre' => 'required|string',
             'descripcion' => 'nullable|string',
@@ -88,6 +98,7 @@ class DepartamentosController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('admin-stuff');
         $departamento = App\Departamentos::findOrFail($id);
         $departamento->delete();
         return redirect()->route('departamentos.index');

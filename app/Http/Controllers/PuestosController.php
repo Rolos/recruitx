@@ -7,6 +7,11 @@ use App;
 
 class PuestosController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,6 +30,7 @@ class PuestosController extends Controller
      */
     public function create()
     {
+        Gate::authorize('admin-stuff');
         return view('puestos.create');
     }
 
@@ -36,6 +42,7 @@ class PuestosController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('admin-stuff');
         $request->validate([
             'nombre' => 'required|string',
             'nivel_riesgo' => 'required|string|in:alto,medio,bajo',
@@ -60,6 +67,7 @@ class PuestosController extends Controller
      */
     public function edit($id)
     {
+        Gate::authorize('admin-stuff');
         $puesto = App\Puestos::findOrFail($id);
         return view('puestos.update', ['puesto' => $puesto]);
     }
@@ -73,6 +81,7 @@ class PuestosController extends Controller
      */
     public function update(Request $request, $id)
     {
+        Gate::authorize('admin-stuff');
         $request->validate([
             'nombre' => 'required|string',
             'nivel_riesgo' => 'required|string|in:alto,medio,bajo',
@@ -99,6 +108,7 @@ class PuestosController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('admin-stuff');
         $puestos = App\Puestos::findOrFail($id);
         $puestos->delete();
         return redirect()->route('puestos.index');

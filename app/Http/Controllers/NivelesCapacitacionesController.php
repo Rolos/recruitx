@@ -7,6 +7,10 @@ use App;
 
 class NivelesCapacitacionesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,6 +18,7 @@ class NivelesCapacitacionesController extends Controller
      */
     public function index()
     {
+        Gate::authorize('admin-stuff');
         $niveles = App\NivelesCapacitaciones::paginate(20);
         return view('cniveles.index', ['niveles' => $niveles]);
     }
@@ -25,6 +30,7 @@ class NivelesCapacitacionesController extends Controller
      */
     public function create()
     {
+        Gate::authorize('admin-stuff');
         return view('cniveles.create');
     }
 
@@ -36,6 +42,7 @@ class NivelesCapacitacionesController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('admin-stuff');
         $request->validate([
             'nombre' => 'required|string',
             'descripcion' => 'nullable|string',
@@ -55,6 +62,7 @@ class NivelesCapacitacionesController extends Controller
      */
     public function edit($id)
     {
+        Gate::authorize('admin-stuff');
         $nivel = App\NivelesCapacitaciones::findOrFail($id);
         return view('cniveles.update', ['nivel' => $nivel]);
     }
@@ -68,6 +76,7 @@ class NivelesCapacitacionesController extends Controller
      */
     public function update(Request $request, $id)
     {
+        Gate::authorize('admin-stuff');
         $request->validate([
             'nombre' => 'required|string',
             'descripcion' => 'nullable|string',
@@ -88,6 +97,7 @@ class NivelesCapacitacionesController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('admin-stuff');
         $nivel = App\NivelesCapacitaciones::findOrFail($id);
         $nivel->delete();
         return redirect()->route('cniveles.index');

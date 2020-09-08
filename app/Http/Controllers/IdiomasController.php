@@ -7,6 +7,11 @@ use App;
 
 class IdiomasController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,6 +19,7 @@ class IdiomasController extends Controller
      */
     public function index()
     {
+        Gate::authorize('admin-stuff');
         $idiomas = App\Idiomas::paginate(20);
         return view('idiomas.index', ['idiomas' => $idiomas]);
     }
@@ -25,6 +31,7 @@ class IdiomasController extends Controller
      */
     public function create()
     {
+        Gate::authorize('admin-stuff');
         return view('idiomas.create');
     }
 
@@ -36,6 +43,7 @@ class IdiomasController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('admin-stuff');
         $request->validate([
             'nombre' => 'required|string',
         ]);
@@ -54,6 +62,7 @@ class IdiomasController extends Controller
      */
     public function edit($id)
     {
+        Gate::authorize('admin-stuff');
         $idioma = App\Idiomas::findOrFail($id);
         return view('idiomas.update', ['idioma' => $idioma]);
     }
@@ -67,6 +76,7 @@ class IdiomasController extends Controller
      */
     public function update(Request $request, $id)
     {
+        Gate::authorize('admin-stuff');
         $request->validate([
             'estado' => 'required|string',
             'nombre' => 'required|string',
@@ -87,6 +97,7 @@ class IdiomasController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('admin-stuff');
         $idiomas = App\Idiomas::findOrFail($id);
         $idiomas->delete();
         return redirect()->route('idiomas.index');

@@ -49,14 +49,18 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{route('candidatos.index')}}">Candidatos <span class="sr-only">(current)</span></a>
                                     <a class="dropdown-item" href="{{route('puestos.index')}}">Puestos</a>
-                                    <a class="dropdown-item" href="{{route('empleados.index')}}">Empleados</a>
-                                    <a class="dropdown-item" href="{{route('competencias.index')}}">Competencias</a>
-                                    <a class="dropdown-item" href="{{route('cniveles.index')}}">Niveles de Capacitaciones</a>
-                                    <a class="dropdown-item" href="{{route('capacitaciones.index')}}">Capacitaciones</a>
-                                    <a class="dropdown-item" href="{{route('idiomas.index')}}">Idiomas</a>
-                                    <a class="dropdown-item" href="{{route('departamentos.index')}}">Departamentos</a>
+                                    @can('admin-stuff')
+                                        <a class="dropdown-item" href="{{route('candidatos.index')}}">Candidatos</a>
+                                        <a class="dropdown-item" href="{{route('empleados.index')}}">Empleados</a>
+                                        <a class="dropdown-item" href="{{route('competencias.index')}}">Competencias</a>
+                                        <a class="dropdown-item" href="{{route('cniveles.index')}}">Niveles de Capacitaciones</a>
+                                        <a class="dropdown-item" href="{{route('capacitaciones.index')}}">Capacitaciones</a>
+                                        <a class="dropdown-item" href="{{route('idiomas.index')}}">Idiomas</a>
+                                        <a class="dropdown-item" href="{{route('departamentos.index')}}">Departamentos</a>
+                                    @else
+
+                                    @endcan
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

@@ -7,6 +7,11 @@ use App;
 
 class EmpleadosController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,6 +19,7 @@ class EmpleadosController extends Controller
      */
     public function index()
     {
+        Gate::authorize('admin-stuff');
         $empleados = App\Empleados::where('estado', 'activo')->paginate(20);
         return view('empleados.index', ['empleados' => $empleados]);
     }
@@ -25,6 +31,7 @@ class EmpleadosController extends Controller
      */
     public function create()
     {
+        Gate::authorize('admin-stuff');
         return view('empleados.create', [
             'puestos' =>  App\Puestos::where('estado', 'activo')->get(),
             'departamentos' => App\Departamentos::all(),
@@ -33,6 +40,7 @@ class EmpleadosController extends Controller
 
     public function createFromCandidate($candidatoId)
     {
+        Gate::authorize('admin-stuff');
         return view('empleados.create', [
             'puestos' =>  App\Puestos::where('estado', 'activo')->get(),
             'departamentos' => App\Departamentos::all(),
@@ -48,6 +56,7 @@ class EmpleadosController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('admin-stuff');
         $request->validate([
             'cedula' => 'required|string|size:11',
             'nombre' => 'required|string',
@@ -82,6 +91,7 @@ class EmpleadosController extends Controller
      */
     public function edit($id)
     {
+        Gate::authorize('admin-stuff');
         $empleado = App\Empleados::findOrFail($id);
         return view('empleados.update', [
             'empleado' => $empleado,
@@ -99,6 +109,7 @@ class EmpleadosController extends Controller
      */
     public function update(Request $request, $id)
     {
+        Gate::authorize('admin-stuff');
         $request->validate([
             'cedula' => 'required|string|size:11',
             'nombre' => 'required|string',
@@ -128,6 +139,7 @@ class EmpleadosController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('admin-stuff');
         $empleado = App\Empleados::findOrFail($id);
         $empleado->delete();
         return redirect()->route('empleados.index');

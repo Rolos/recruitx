@@ -7,6 +7,11 @@ use App;
 
 class CompetenciasController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,6 +19,7 @@ class CompetenciasController extends Controller
      */
     public function index()
     {
+        Gate::authorize('admin-stuff');
         $competencias = App\Competencias::paginate(20);
         return view('competencias.index', ['competencias' => $competencias]);
     }
@@ -25,6 +31,7 @@ class CompetenciasController extends Controller
      */
     public function create()
     {
+        Gate::authorize('admin-stuff');
         return view('competencias.create');
     }
 
@@ -36,6 +43,7 @@ class CompetenciasController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('admin-stuff');
         $request->validate([
             'descripcion' => 'required|string',
         ]);
@@ -54,6 +62,7 @@ class CompetenciasController extends Controller
      */
     public function edit($id)
     {
+        Gate::authorize('admin-stuff');
         $competencias = App\Competencias::findOrFail($id);
         return view('competencias.update', ['competencia' => $competencias]);
     }
@@ -67,6 +76,7 @@ class CompetenciasController extends Controller
      */
     public function update(Request $request, $id)
     {
+        Gate::authorize('admin-stuff');
         $request->validate([
             'estado' => 'required|string',
             'descripcion' => 'required|string',
@@ -87,6 +97,7 @@ class CompetenciasController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('admin-stuff');
         $competencias = App\Competencias::findOrFail($id);
         $competencias->delete();
         return redirect()->route('competencias.index');

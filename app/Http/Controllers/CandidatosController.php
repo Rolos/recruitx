@@ -7,6 +7,11 @@ use App;
 
 class CandidatosController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,6 +19,8 @@ class CandidatosController extends Controller
      */
     public function index()
     {
+        Gate::authorize('admin-stuff');
+
         $candidatos = App\Candidatos::paginate(20);
         return view('candidatos.index', ['candidatos' => $candidatos]);
     }

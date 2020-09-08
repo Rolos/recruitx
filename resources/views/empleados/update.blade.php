@@ -16,10 +16,6 @@
             <input id="nombre" name="nombre" type="text" class="@error('nombre') is-invalid @enderror form-control" value="{{$empleado->nombre}}">
         </div>
         <div class="form-group">
-            <label for="fecha_ingreso">Fecha de ingreso</label>
-            <input id="fecha_ingreso" name="fecha_ingreso" type="date" class="@error('fecha_ingreso') is-invalid @enderror form-control" value="{{$empleado->fecha_ingreso}}">
-        </div>
-        <div class="form-group">
             <label for="departamento">Departamento</label>
             <select id="departamento" name="departamento" class="@error('departamento') is-invalid @enderror custom-select">
                 @foreach ($departamentos as $departamento)

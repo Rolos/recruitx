@@ -40,9 +40,11 @@
                 <td>{{ $candidato->recomendado_por }}</td>
                 <td>
                     @if($candidato->es_empleado)
-                        ✓
+                        Contratado
                     @else
-                        <a href="{{route('empleados.create.candidate', ['candidatoId' => $candidato->id])}}" class="btn btn-primary">Contratar</a>
+                        <a href="{{route('empleados.create.candidate', ['candidatoId' => $candidato->id, 'puestoId' => $puesto->id])}}" class="btn btn-primary">
+                            Contratar
+                        </a>
                     @endif
                 </td>
             </tr>

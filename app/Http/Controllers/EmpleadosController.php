@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App;
 use Illuminate\Support\Facades\Gate;
+use Carbon\Carbon;
 
 class EmpleadosController extends Controller
 {
@@ -39,13 +40,14 @@ class EmpleadosController extends Controller
         ]);
     }
 
-    public function createFromCandidate($candidatoId)
+    public function createFromCandidate($candidatoId, $puestoId)
     {
         Gate::authorize('admin-stuff');
         return view('empleados.create', [
             'puestos' =>  App\Puestos::where('estado', 'activo')->get(),
             'departamentos' => App\Departamentos::all(),
             'candidato' => App\Candidatos::findOrFail($candidatoId),
+            'puestoId' => $puestoId,
         ]);
     }
 
@@ -61,7 +63,6 @@ class EmpleadosController extends Controller
         $request->validate([
             'cedula' => 'required|string|size:11',
             'nombre' => 'required|string',
-            'fecha_ingreso' => 'required|date',
             'puesto' => 'required|exists:puestos,id',
             'departamento' => 'required|exists:departamentos,id',
             'salario' => 'required|numeric',
@@ -69,7 +70,7 @@ class EmpleadosController extends Controller
         App\Empleados::create([
             'cedula' => $request->input('cedula'),
             'nombre' => $request->input('nombre'),
-            'fecha_ingreso' => $request->input('fecha_ingreso'),
+            'fecha_ingreso' => Carbon::now(),
             'puesto_id' => $request->input('puesto'),
             'departamento_id' => $request->input('departamento'),
             'salario_mensual' => $request->input('salario'),
@@ -81,6 +82,9 @@ class EmpleadosController extends Controller
             $candidato->es_empleado = true;
             $candidato->save();
         }
+        $puesto = App\Puestos::find($request->input('puesto'));
+        $puesto->estado = 'inactivo';
+        $puesto->save();
         return redirect()->route('empleados.index');
     }
 
@@ -114,7 +118,6 @@ class EmpleadosController extends Controller
         $request->validate([
             'cedula' => 'required|string|size:11',
             'nombre' => 'required|string',
-            'fecha_ingreso' => 'required|date',
             'puesto' => 'required|exists:puestos,id',
             'departamento' => 'required|exists:departamentos,id',
             'salario' => 'required|numeric',
@@ -123,7 +126,6 @@ class EmpleadosController extends Controller
         $empleado->update([
             'cedula' => $request->input('cedula'),
             'nombre' => $request->input('nombre'),
-            'fecha_ingreso' => $request->input('fecha_ingreso'),
             'puesto_id' => $request->input('puesto'),
             'departamento_id' => $request->input('departamento'),
             'salario_mensual' => $request->input('salario'),

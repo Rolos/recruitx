@@ -31,7 +31,7 @@ Route::resources([
     'empleados' => 'EmpleadosController',
 ]);
 
-Route::get('/empleados/create/candidate/{candidatoId}', 'EmpleadosController@createFromCandidate')
+Route::get('/empleados/create/candidate/{candidatoId}/puesto/{puestoId}', 'EmpleadosController@createFromCandidate')
     ->name('empleados.create.candidate');
 
 Route::get('/candidates/{id}/experience', 'CandidatosController@addExperience')

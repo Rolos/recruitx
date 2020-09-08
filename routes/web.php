@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-})->name('index');
+Auth::routes();
+
+Route::get('/', 'HomeController@index')->name('home');
 
 Route::resources([
     'candidatos' => 'CandidatosController',
@@ -53,6 +53,3 @@ Route::get('/candidates/{id}/puesto/{puestoId}', 'CandidatosController@aplicarPu
 Route::get('/candidates/{id}/puesto/{puestoId}/remover', 'CandidatosController@removerPuesto')
     ->name('candidates.position.remove');
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

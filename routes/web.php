@@ -52,3 +52,7 @@ Route::get('/candidates/{id}/puesto/{puestoId}', 'CandidatosController@aplicarPu
 
 Route::get('/candidates/{id}/puesto/{puestoId}/remover', 'CandidatosController@removerPuesto')
     ->name('candidates.position.remove');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

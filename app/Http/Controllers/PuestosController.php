@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
 
 class PuestosController extends Controller
 {
@@ -20,8 +21,30 @@ class PuestosController extends Controller
      */
     public function index()
     {
-        $puestos = App\Puestos::paginate(20);
-        return view('puestos.index', ['puestos' => $puestos]);
+        $puestos = Auth::user()->can('admin-stuff')
+            ? App\Puestos::paginate(20)
+            : App\Puestos::where('estado', 'activo')->paginate(20);
+        $puestos_aplicados = [];
+        if (Auth::user()->can('candidate-stuff')) {
+            $puestos_aplicados = Auth::user()->candidato->puestos->map(function ($item) {
+                return $item->id;
+            })->toArray();
+        }
+        return view('puestos.index', ['puestos' => $puestos, 'puestos_aplicados' => $puestos_aplicados]);
+    }
+
+    public function myPositions()
+    {
+        Gate::authorize('candidate-stuff');
+        $puestos = Auth::user()->candidato->puestos;
+        $puestos_aplicados = $puestos->map(function ($item) {
+            return $item->id;
+        })->toArray();
+        return view('puestos.index', [
+            'puestos' => $puestos,
+            'puestos_aplicados' => $puestos_aplicados,
+            'hide_links' => false
+        ]);
     }
 
     /**

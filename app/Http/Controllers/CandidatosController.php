@@ -243,6 +243,7 @@ class CandidatosController extends Controller
         Gate::authorize('candidate-stuff');
         $candidato = App\Candidatos::findOrFail($id);
         $candidato->puestos()->attach($puestoId);
+        return redirect()->route('puestos.index');
     }
 
     public function removerPuesto($id, $puestoId)
@@ -250,5 +251,6 @@ class CandidatosController extends Controller
         Gate::authorize('candidate-stuff');
         $candidato = App\Candidatos::findOrFail($id);
         $candidato->puestos()->detach($puestoId);
+        return redirect()->route('puestos.index');
     }
 }

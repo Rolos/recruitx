@@ -17,6 +17,9 @@ Auth::routes();
 
 Route::redirect('/', '/puestos');
 
+Route::get('/puestos/me', 'PuestosController@myPositions')
+    ->name('puestos.my');
+
 Route::resources([
     'candidatos' => 'CandidatosController',
     'capacitaciones' => 'CapacitacionesController',

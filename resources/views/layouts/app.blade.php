@@ -58,6 +58,7 @@
                                         <a class="dropdown-item" href="{{route('idiomas.index')}}">Idiomas</a>
                                         <a class="dropdown-item" href="{{route('departamentos.index')}}">Departamentos</a>
                                     @elsecan('candidate-stuff')
+                                        <a class="dropdown-item" href="{{route('puestos.my')}}">Mis Puestos</a>
                                         <a class="dropdown-item" href="{{route('candidatos.create')}}">Resume</a>
                                     @endcan
 

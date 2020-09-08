@@ -21,7 +21,6 @@ Route::resources([
     'candidatos' => 'CandidatosController',
     'capacitaciones' => 'CapacitacionesController',
     'competencias' => 'CompetenciasController',
-    'experiencia' => 'ExperienciaLaboralController',
     'idiomas' => 'IdiomasController',
     'puestos' => 'PuestosController',
     'departamentos' => 'DepartamentosController',

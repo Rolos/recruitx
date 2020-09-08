@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App;
+use Illuminate\Support\Facades\Gate;
 
 class CandidatosController extends Controller
 {
@@ -32,6 +33,7 @@ class CandidatosController extends Controller
      */
     public function create()
     {
+        Gate::authorize('candidate-stuff');
         return view('candidatos.create', [
             'departamentos' => App\Departamentos::all(),
             'capacitaciones' => App\Capacitaciones::all(),
@@ -48,6 +50,7 @@ class CandidatosController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('candidate-stuff');
         $request->validate([
             'cedula' => 'required|string|size:11',
             'nombre' => 'required|string',
@@ -84,6 +87,7 @@ class CandidatosController extends Controller
      */
     public function edit($id)
     {
+        Gate::authorize('candidate-stuff');
         $candidato = App\Candidatos::findOrFail($id);
         $candidato_competencias = $candidato->competencias->map(function ($item) {
             return $item->id;
@@ -115,6 +119,7 @@ class CandidatosController extends Controller
      */
     public function update(Request $request, $id)
     {
+        Gate::authorize('candidate-stuff');
         $request->validate([
             'cedula' => 'required|string|size:11',
             'nombre' => 'required|string',
@@ -149,6 +154,7 @@ class CandidatosController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('candidate-stuff');
         $candidatos = App\Candidatos::findOrFail($id);
         $candidatos->delete();
         return redirect()->route('candidatos.index');
@@ -156,6 +162,7 @@ class CandidatosController extends Controller
 
     public function addExperience($id)
     {
+        Gate::authorize('candidate-stuff');
         $candidato = App\Candidatos::findOrFail($id);
         return view('candidatos.create_experience', [
             'candidato' => $candidato,
@@ -165,6 +172,7 @@ class CandidatosController extends Controller
 
     public function storeExperience(Request $request, $id)
     {
+        Gate::authorize('candidate-stuff');
         $request->validate([
             'empresa' => 'required|string',
             'puesto_ocupado' => 'required|exists:puestos,id',
@@ -185,6 +193,7 @@ class CandidatosController extends Controller
 
     public function removeExperience($id, $experienceId)
     {
+        Gate::authorize('candidate-stuff');
         $experiencia = App\ExperienciaLaboral::findOrFail($experienceId);
         $experiencia->delete();
         return redirect()->route('candidatos.edit', ['candidato' => $id]);
@@ -192,6 +201,7 @@ class CandidatosController extends Controller
 
     public function editExperience($id, $experienceId)
     {
+        Gate::authorize('candidate-stuff');
         $candidato = App\Candidatos::findOrFail($id);
         $experience = App\ExperienciaLaboral::findOrFail($experienceId);
         return view('candidatos.update_experience', [
@@ -203,6 +213,7 @@ class CandidatosController extends Controller
 
     public function updateExperience(Request $request, $id, $experienceId)
     {
+        Gate::authorize('candidate-stuff');
         $request->validate([
             'empresa' => 'required|string',
             'puesto_ocupado' => 'required|exists:puestos,id',
@@ -224,12 +235,14 @@ class CandidatosController extends Controller
 
     public function aplicarPuesto($id, $puestoId)
     {
+        Gate::authorize('candidate-stuff');
         $candidato = App\Candidatos::findOrFail($id);
         $candidato->puestos()->attach($puestoId);
     }
 
     public function removerPuesto($id, $puestoId)
     {
+        Gate::authorize('candidate-stuff');
         $candidato = App\Candidatos::findOrFail($id);
         $candidato->puestos()->detach($puestoId);
     }

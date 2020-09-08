@@ -16,7 +16,9 @@
                 <th scope="col">Salario Minimo</th>
                 <th scope="col">Salario Maximo</th>
                 @can('admin-stuff')
+                <th scope="col">Candidatos</th>
                 <th scope="col">Estado</th>
+                <th scope="col"></th>
                 <th scope="col"></th>
                 <th scope="col"></th>
                 @elsecan('candidate-stuff')
@@ -32,8 +34,10 @@
                 <th scope="row">{{ $puesto->salario_minimo }}</th>
                 <th scope="row">{{ $puesto->salario_maximo }}</th>
                 @can('admin-stuff')
+                <td>{{ $puesto->candidatos->count() }}</td>
                 <td>{{ $puesto->estado }}</td>
-                <td><a href="{{route('puestos.edit', $puesto)}}" class="btn btn-primary">Editar</a></td>
+                <td><a href="{{route('puestos.show', $puesto)}}" class="btn btn-primary">Ver</a></td>
+                <td><a href="{{route('puestos.edit', $puesto)}}" class="btn btn-secondary">Editar</a></td>
                 <td>
                     <form method="POST" action="{{route('puestos.destroy', $puesto)}}">
                         @method('DELETE')

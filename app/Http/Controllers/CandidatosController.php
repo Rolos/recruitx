@@ -15,19 +15,6 @@ class CandidatosController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        Gate::authorize('admin-stuff');
-
-        $candidatos = App\Candidatos::paginate(20);
-        return view('candidatos.index', ['candidatos' => $candidatos]);
-    }
-
-    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -81,7 +68,7 @@ class CandidatosController extends Controller
         if ($request->has('crear_y_experiencia')) {
             return redirect()->route('candidates.experience.add', ['id' => $candidato->id]);
         }
-        return redirect()->route('candidatos.index');
+        return redirect()->route('puestos.index');
     }
 
     /**
@@ -148,7 +135,7 @@ class CandidatosController extends Controller
         $candidato->competencias()->sync($request->get('competencias'));
         $candidato->capacitaciones()->sync($request->get('capacitaciones'));
         $candidato->idiomas()->sync($request->get('idiomas'));
-        return redirect()->route('candidatos.index');
+        return redirect()->route('puestos.index');
     }
 
     /**
@@ -162,7 +149,7 @@ class CandidatosController extends Controller
         Gate::authorize('candidate-stuff');
         $candidatos = App\Candidatos::findOrFail($id);
         $candidatos->delete();
-        return redirect()->route('candidatos.index');
+        return redirect()->route('puestos.index');
     }
 
     public function addExperience($id)

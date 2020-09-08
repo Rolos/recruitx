@@ -83,7 +83,12 @@
                 </div>
             @endforeach
         </div>
-        @include('includes.experiencias')
-        <button type="submit" class="btn btn-primary">Actualizar</button>
+        <button class="btn btn-primary">Actualizar</button>
     </form>
+    <form method="POST" action="{{route('candidatos.destroy', $candidato)}}">
+        @method('DELETE')
+        @csrf
+        <button class="btn btn-danger">Borrar</button>
+    </form>
+    @include('includes.experiencias')
 @endsection

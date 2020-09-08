@@ -58,6 +58,13 @@ class PuestosController extends Controller
         return view('puestos.create');
     }
 
+    public function show($id)
+    {
+        Gate::authorize('admin-stuff');
+        $puesto = App\Puestos::findOrFail($id);
+        return view('puestos.show', ['puesto' => $puesto]);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

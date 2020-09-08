@@ -12,7 +12,7 @@
         </div>
         <div class="form-group">
             <label for="nombre">Nombre</label>
-            <input id="nombre" name="nombre" type="text" class="@error('nombre') is-invalid @enderror form-control">
+            <input id="nombre" name="nombre" type="text" class="@error('nombre') is-invalid @enderror form-control" value="{{Auth::user()->name}}">
         </div>
         <div class="form-group">
             <label for="telefono">Tel&eacute;fono</label>

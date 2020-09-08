@@ -63,12 +63,14 @@ class CreateInitialDatabase extends Migration
             $table->string('nombre');
             $table->string('telefono');
             $table->unsignedBigInteger('departamento_id');
+            $table->unsignedBigInteger('user_id');
             $table->integer('salario_al_que_aspira');
             $table->string('recomendado_por');
             $table->boolean('es_empleado')->default(false);
             $table->timestamps();
 
             $table->foreign('departamento_id')->references('id')->on('departamentos');
+            $table->foreign('user_id')->references('id')->on('users');
         });
         Schema::create('experiencia_laboral', function (Blueprint $table) {
             $table->id();

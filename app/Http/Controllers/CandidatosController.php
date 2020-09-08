@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
 
 class CandidatosController extends Controller
 {
@@ -34,6 +35,9 @@ class CandidatosController extends Controller
     public function create()
     {
         Gate::authorize('candidate-stuff');
+        if (Auth::user()->candidato != null) {
+            return redirect()->route('candidatos.edit',  Auth::user()->candidato);
+        }
         return view('candidatos.create', [
             'departamentos' => App\Departamentos::all(),
             'capacitaciones' => App\Capacitaciones::all(),
@@ -69,6 +73,7 @@ class CandidatosController extends Controller
             'departamento_id' => $request->input('departamento'),
             'salario_al_que_aspira' => $request->input('salario'),
             'recomendado_por' => $request->input('recomendado'),
+            'user_id' => Auth::id(),
         ]);
         $candidato->competencias()->sync($request->get('competencias'));
         $candidato->capacitaciones()->sync($request->get('capacitaciones'));

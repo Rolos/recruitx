@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
+use App\User;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -167,5 +169,12 @@ class DatabaseSeeder extends Seeder
         foreach ($puestos as $puesto) {
             App\Puestos::create($puesto);
         }
+
+        User::create([
+            'name' => 'admin',
+            'email' => 'admin@recruitx.net',
+            'role' => 'admin',
+            'password' => Hash::make('adminpassword'),
+        ]);
     }
 }

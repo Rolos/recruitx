@@ -9,8 +9,13 @@ class Candidatos extends Model
     protected $table = 'candidatos';
 
     protected $fillable = [
-        'cedula', 'nombre', 'telefono', 'departamento_id', 'salario_al_que_aspira', 'recomendado_por'
+        'cedula', 'nombre', 'telefono', 'departamento_id', 'salario_al_que_aspira', 'recomendado_por', 'user_id'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 
     public function departamento()
     {

@@ -14,7 +14,7 @@ class EmpleadosController extends Controller
      */
     public function index()
     {
-        $empleados = App\Empleados::paginate(20);
+        $empleados = App\Empleados::where('estado', 'activo')->paginate(20);
         return view('empleados.index', ['empleados' => $empleados]);
     }
 
@@ -26,7 +26,7 @@ class EmpleadosController extends Controller
     public function create()
     {
         return view('empleados.create', [
-            'puestos' =>  App\Puestos::all(),
+            'puestos' =>  App\Puestos::where('estado', 'activo')->get(),
             'departamentos' => App\Departamentos::all(),
         ]);
     }
@@ -34,7 +34,7 @@ class EmpleadosController extends Controller
     public function createFromCandidate($candidatoId)
     {
         return view('empleados.create', [
-            'puestos' =>  App\Puestos::all(),
+            'puestos' =>  App\Puestos::where('estado', 'activo')->get(),
             'departamentos' => App\Departamentos::all(),
             'candidato' => App\Candidatos::findOrFail($candidatoId),
         ]);
@@ -85,7 +85,7 @@ class EmpleadosController extends Controller
         $empleado = App\Empleados::findOrFail($id);
         return view('empleados.update', [
             'empleado' => $empleado,
-            'puestos' =>  App\Puestos::all(),
+            'puestos' =>  App\Puestos::where('estado', 'activo')->get(),
             'departamentos' => App\Departamentos::all(),
         ]);
     }
@@ -115,6 +115,7 @@ class EmpleadosController extends Controller
             'puesto_id' => $request->input('puesto'),
             'departamento_id' => $request->input('departamento'),
             'salario_mensual' => $request->input('salario'),
+            'estado' => $request->input('estado'),
         ]);
         return redirect()->route('empleados.index');
     }
@@ -128,9 +129,7 @@ class EmpleadosController extends Controller
     public function destroy($id)
     {
         $empleado = App\Empleados::findOrFail($id);
-        $empleado->update([
-            'estado' => 'inactivo',
-        ]);
+        $empleado->delete();
         return redirect()->route('empleados.index');
     }
 }

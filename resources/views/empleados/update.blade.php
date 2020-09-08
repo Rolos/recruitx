@@ -39,6 +39,13 @@
             <label for="salario">Salario Mensual</label>
             <input id="salario" name="salario" type="number" class="@error('salario') is-invalid @enderror form-control" value="{{$empleado->salario_mensual}}">
         </div>
+        <div class="form-group">
+            <label for="estado">Estado</label>
+            <select id="estado" name="estado" class="@error('estado') is-invalid @enderror custom-select">
+                <option value="inactivo" @if($empleado->estado == 'inactivo') selected @endif>inactivo</option>
+                <option value="activo" @if($empleado->estado == 'activo') selected @endif>activo</option>
+            </select>
+        </div>
         <button type="submit" class="btn btn-primary">Actualizar</button>
     </form>
 @endsection

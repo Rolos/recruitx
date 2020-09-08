@@ -26,11 +26,10 @@ class CandidatosController extends Controller
     public function create()
     {
         return view('candidatos.create', [
-            'puestos' =>  App\Puestos::all(),
             'departamentos' => App\Departamentos::all(),
             'capacitaciones' => App\Capacitaciones::all(),
-            'competencias' => App\Competencias::all(),
-            'idiomas' => App\Idiomas::all(),
+            'competencias' => App\Competencias::where('estado', 'activo')->get(),
+            'idiomas' => App\Idiomas::where('estado', 'activo')->get(),
         ]);
     }
 
@@ -90,11 +89,10 @@ class CandidatosController extends Controller
         });
         return view('candidatos.update', [
             'candidato' => $candidato,
-            'puestos' =>  App\Puestos::all(),
             'departamentos' => App\Departamentos::all(),
             'capacitaciones' => App\Capacitaciones::all(),
-            'competencias' => App\Competencias::all(),
-            'idiomas' => App\Idiomas::all(),
+            'competencias' => App\Competencias::where('estado', 'activo')->get(),
+            'idiomas' => App\Idiomas::where('estado', 'activo')->get(),
             'candidato_competencias' => $candidato_competencias->toArray(),
             'candidato_capacitaciones' => $candidato_capacitaciones->toArray(),
             'candidato_idiomas' => $candidato_idiomas->toArray(),
@@ -154,7 +152,7 @@ class CandidatosController extends Controller
         $candidato = App\Candidatos::findOrFail($id);
         return view('candidatos.create_experience', [
             'candidato' => $candidato,
-            'puestos' =>  App\Puestos::all(),
+            'puestos' =>  App\Puestos::where('estado', 'activo')->get(),
         ]);
     }
 
@@ -191,7 +189,7 @@ class CandidatosController extends Controller
         $experience = App\ExperienciaLaboral::findOrFail($experienceId);
         return view('candidatos.update_experience', [
             'candidato' => $candidato,
-            'puestos' =>  App\Puestos::all(),
+            'puestos' =>  App\Puestos::where('estado', 'activo')->get(),
             'experiencia' => $experience,
         ]);
     }

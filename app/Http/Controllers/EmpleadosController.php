@@ -19,10 +19,18 @@ class EmpleadosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         Gate::authorize('admin-stuff');
-        $empleados = App\Empleados::where('estado', 'activo')->paginate(20);
+        $query = App\Empleados::where('estado', 'activo');
+        if ($request->has('initial_date') && !empty($request->get('initial_date'))) {
+            $query->where('fecha_ingreso', '>=', $request->get('initial_date'));
+        }
+        if ($request->has('final_date') && !empty($request->get('final_date'))) {
+            $query->where('fecha_ingreso', '<=', $request->get('final_date'));
+        }
+        $request->flash();
+        $empleados = $query->paginate(20);
         return view('empleados.index', ['empleados' => $empleados]);
     }
 

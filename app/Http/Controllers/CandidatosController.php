@@ -19,12 +19,27 @@ class CandidatosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         Gate::authorize('admin-stuff');
-
-        $candidatos = App\Candidatos::paginate(20);
-        return view('candidatos.index', ['candidatos' => $candidatos]);
+        $candidatos = App\Candidatos::cedula($request)
+            ->nombre($request)
+            ->telefono($request)
+            ->departamentos($request)
+            ->puestos($request)
+            ->capacitaciones($request)
+            ->competencias($request)
+            ->idiomas($request)
+            ->paginate(20);
+        $request->flash();
+        return view('candidatos.index', [
+            'candidatos' => $candidatos,
+            'departamentos' => App\Departamentos::all(),
+            'puestos' => App\Puestos::where('estado', 'activo')->get(),
+            'capacitaciones' => App\Capacitaciones::all(),
+            'competencias' => App\Competencias::where('estado', 'activo')->get(),
+            'idiomas' => App\Idiomas::where('estado', 'activo')->get(),
+        ]);
     }
 
     /**

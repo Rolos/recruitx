@@ -52,6 +52,7 @@
                                     <a class="dropdown-item" href="{{route('puestos.index')}}">Puestos</a>
                                     @can('admin-stuff')
                                         <a class="dropdown-item" href="{{route('empleados.index')}}">Empleados</a>
+                                        <a class="dropdown-item" href="{{route('candidatos.index')}}">Candidatos</a>
                                         <a class="dropdown-item" href="{{route('competencias.index')}}">Competencias</a>
                                         <a class="dropdown-item" href="{{route('cniveles.index')}}">Niveles de Capacitaciones</a>
                                         <a class="dropdown-item" href="{{route('capacitaciones.index')}}">Capacitaciones</a>

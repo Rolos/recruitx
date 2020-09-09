@@ -15,6 +15,19 @@ class CandidatosController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        Gate::authorize('admin-stuff');
+
+        $candidatos = App\Candidatos::paginate(20);
+        return view('candidatos.index', ['candidatos' => $candidatos]);
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

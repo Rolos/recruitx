@@ -32,5 +32,9 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('candidate-stuff', function ($user) {
             return $user->role == 'candidate';
         });
+
+        Gate::define('same-candidate', function ($user, $currentId) {
+            return $user->role == 'candidate' && $user->has('candidato') && $user->candidato->id == $currentId;
+        });
     }
 }

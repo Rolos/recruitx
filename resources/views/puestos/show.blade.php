@@ -27,6 +27,7 @@
             <th scope="col">Salario al que aspira</th>
             <th scope="col">Recomendado por</th>
             <th scope="col"></th>
+            <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
@@ -39,10 +40,15 @@
                 <td>{{ $candidato->salario_al_que_aspira }}</td>
                 <td>{{ $candidato->recomendado_por }}</td>
                 <td>
+                    <a href="{{route('candidatos.show', $candidato)}}" class="btn btn-primary">
+                        Ver
+                    </a>
+                </td>
+                <td>
                     @if($candidato->es_empleado)
                         Contratado
                     @else
-                        <a href="{{route('empleados.create.candidate', ['candidatoId' => $candidato->id, 'puestoId' => $puesto->id])}}" class="btn btn-primary">
+                        <a href="{{route('empleados.create.candidate', ['candidatoId' => $candidato->id, 'puestoId' => $puesto->id])}}" class="btn btn-danger">
                             Contratar
                         </a>
                     @endif

@@ -51,7 +51,7 @@ class CandidatosController extends Controller
     {
         Gate::authorize('candidate-stuff');
         if (Auth::user()->candidato != null) {
-            return redirect()->route('candidatos.edit',  Auth::user()->candidato);
+            return redirect()->route('candidatos.show',  Auth::user()->candidato);
         }
         return view('candidatos.create', [
             'departamentos' => App\Departamentos::all(),
@@ -96,7 +96,13 @@ class CandidatosController extends Controller
         if ($request->has('crear_y_experiencia')) {
             return redirect()->route('candidates.experience.add', ['id' => $candidato->id]);
         }
-        return redirect()->route('puestos.index');
+        return redirect()->route('candidatos.show', $candidato);
+    }
+
+    public function show($id)
+    {
+        $candidato = App\Candidatos::findOrFail($id);
+        return view('candidatos.show', ['candidato' => $candidato]);
     }
 
     /**
@@ -163,7 +169,7 @@ class CandidatosController extends Controller
         $candidato->competencias()->sync($request->get('competencias'));
         $candidato->capacitaciones()->sync($request->get('capacitaciones'));
         $candidato->idiomas()->sync($request->get('idiomas'));
-        return redirect()->route('puestos.index');
+        return redirect()->route('candidatos.show', $candidato);
     }
 
     /**

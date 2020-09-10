@@ -331,7 +331,7 @@ class DatabaseSeeder extends Seeder
         foreach ($puestos as $puesto) {
             App\Puestos::create($puesto);
         }
-        factory(App\Puestos::class, 30)->create();
+        factory(App\Puestos::class, 10)->create();
 
         User::create([
             'name' => 'admin',
@@ -365,6 +365,22 @@ class DatabaseSeeder extends Seeder
                 'candidato_id' => $candidato->id,
                 'puesto_ocupado_id' => DB::table('puestos')->inRandomOrder()->first()->id,
             ]);
+        });
+
+        App\Candidatos::limit(10)->get()->each(function ($candidato) {
+            $puesto = $candidato->puestos->first();
+            factory(App\Empleados::class)->create([
+                'cedula' => $candidato->cedula,
+                'nombre' => $candidato->nombre,
+                'departamento_id' => $candidato->departamento_id,
+                'puesto_id' => $puesto->id,
+                'candidato_id' => $candidato->id,
+                'salario_mensual' => $candidato->salario_al_que_aspira,
+            ]);
+            $candidato->es_empleado = true;
+            $candidato->save();
+            $puesto->estado = 'inactivo';
+            $puesto->save();
         });
     }
 }

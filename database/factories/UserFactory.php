@@ -54,3 +54,10 @@ $factory->define(\App\ExperienciaLaboral::class, function (Faker $faker) {
         'salario' => $faker->numberBetween(10000,50000),
     ];
 });
+
+$factory->define(\App\Empleados::class, function (Faker $faker) {
+    return [
+        'fecha_ingreso' => $faker->dateTimeThisYear(),
+        'estado' => 'activo'
+    ];
+});

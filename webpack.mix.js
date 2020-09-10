@@ -15,3 +15,4 @@ mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css');
 
 mix.copy('resources/img/logo.png', 'public/img/logo.png');
+mix.copy('resources/img/pattern2.png', 'public/img/pattern2.png');

@@ -1,0 +1,42 @@
+.card {
+  .card-header {
+    background-color: $purple-brand;
+    color: white;
+    font-size: 1.2em;
+  }
+}
+
+.btn-primary {
+  background-color: $purple-brand;
+  border-color: $purple-brand;
+  &:hover, &:active {
+    background-color: $purple;
+    border-color: $purple;
+  }
+}
+
+.btn-secondary {
+  background-color: $orange-brand;
+  border-color: $orange-brand;
+  &:hover, &:active {
+    background-color: $orange;
+    border-color: $orange;
+  }
+}
+
+.btn-link {
+  color: $orange-brand;
+  &:hover, &:active {
+    background-color: $orange;
+    border-color: $orange;
+  }
+}
+
+.form-control:focus {
+  border-color: $orange;
+  box-shadow: 0 0 0 0.2rem rgba(248, 151, 29, 0.25);
+}
+
+.pattern-background {
+  background: rgba(117, 78, 149, 0.5) url('/img/pattern2.png');
+}

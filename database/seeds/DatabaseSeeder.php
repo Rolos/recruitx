@@ -30,6 +30,26 @@ class DatabaseSeeder extends Seeder
                 'descripcion' => 'trabajo bajo presion',
                 'estado' => 'activo'
             ],
+            [
+                'descripcion' => 'organizacion',
+                'estado' => 'activo'
+            ],
+            [
+                'descripcion' => 'capacidad de analisis',
+                'estado' => 'activo'
+            ],
+            [
+                'descripcion' => 'toma de decisiones',
+                'estado' => 'activo'
+            ],
+            [
+                'descripcion' => 'creatividad',
+                'estado' => 'activo'
+            ],
+            [
+                'descripcion' => 'comunicacion',
+                'estado' => 'activo'
+            ],
         ];
         foreach ($competencias as $competencia) {
             App\Competencias::create($competencia);
@@ -122,6 +142,36 @@ class DatabaseSeeder extends Seeder
                 'fecha_hasta' => '2019-08-24',
                 'institucion' => 'Centu',
             ],
+            [
+                'descripcion' => 'Curso de cocina',
+                'fecha_desde' => '2017-09-12',
+                'fecha_hasta' => '2019-08-24',
+                'institucion' => 'Unapec',
+            ],
+            [
+                'descripcion' => 'Tecnologo en anime',
+                'fecha_desde' => '2017-09-12',
+                'fecha_hasta' => '2019-08-24',
+                'institucion' => 'Centu',
+            ],
+            [
+                'descripcion' => 'Curso de Barista',
+                'fecha_desde' => '2017-09-12',
+                'fecha_hasta' => '2019-08-24',
+                'institucion' => 'Centu',
+            ],
+            [
+                'descripcion' => 'Probador de carros',
+                'fecha_desde' => '2017-09-12',
+                'fecha_hasta' => '2019-08-24',
+                'institucion' => 'Centu',
+            ],
+            [
+                'descripcion' => 'Probador de baterias',
+                'fecha_desde' => '2017-09-12',
+                'fecha_hasta' => '2019-08-24',
+                'institucion' => 'Centu',
+            ],
         ];
         foreach ($capacitaciones as $capacitacion) {
             $nivel = DB::table('niveles_capacitaciones')->inRandomOrder()->first();
@@ -165,10 +215,123 @@ class DatabaseSeeder extends Seeder
                 'salario_maximo' => 225000,
                 'estado' => 'activo',
             ],
+            [
+                'nombre' => 'Probador de baterias',
+                'nivel_riesgo' => 'alto',
+                'salario_minimo' => 115000,
+                'salario_maximo' => 225000,
+                'estado' => 'activo',
+            ],
+            [
+                'nombre' => 'Organizador de platos',
+                'nivel_riesgo' => 'alto',
+                'salario_minimo' => 115000,
+                'salario_maximo' => 225000,
+                'estado' => 'activo',
+            ],
+            [
+                'nombre' => 'CEO',
+                'nivel_riesgo' => 'alto',
+                'salario_minimo' => 115000,
+                'salario_maximo' => 225000,
+                'estado' => 'activo',
+            ],
+            [
+                'nombre' => 'CTO',
+                'nivel_riesgo' => 'alto',
+                'salario_minimo' => 115000,
+                'salario_maximo' => 225000,
+                'estado' => 'activo',
+            ],
+            [
+                'nombre' => 'Cajero de banco',
+                'nivel_riesgo' => 'medio',
+                'salario_minimo' => 115000,
+                'salario_maximo' => 225000,
+                'estado' => 'activo',
+            ],
+            [
+                'nombre' => 'Matador de vacas',
+                'nivel_riesgo' => 'alto',
+                'salario_minimo' => 115000,
+                'salario_maximo' => 225000,
+                'estado' => 'activo',
+            ],
+            [
+                'nombre' => 'Cocinero',
+                'nivel_riesgo' => 'bajo',
+                'salario_minimo' => 115000,
+                'salario_maximo' => 225000,
+                'estado' => 'activo',
+            ],
+            [
+                'nombre' => 'Pastor de iglesia',
+                'nivel_riesgo' => 'bajo',
+                'salario_minimo' => 115000,
+                'salario_maximo' => 225000,
+                'estado' => 'activo',
+            ],
+            [
+                'nombre' => 'Miembro del PLD',
+                'nivel_riesgo' => 'alto',
+                'salario_minimo' => 115000,
+                'salario_maximo' => 225000,
+                'estado' => 'activo',
+            ],
+            [
+                'nombre' => 'Director de cine',
+                'nivel_riesgo' => 'alto',
+                'salario_minimo' => 115000,
+                'salario_maximo' => 225000,
+                'estado' => 'activo',
+            ],
+            [
+                'nombre' => 'Doble de Brad Pitt',
+                'nivel_riesgo' => 'bajo',
+                'salario_minimo' => 115000,
+                'salario_maximo' => 225000,
+                'estado' => 'activo',
+            ],
+            [
+                'nombre' => 'Payaso',
+                'nivel_riesgo' => 'medio',
+                'salario_minimo' => 115000,
+                'salario_maximo' => 225000,
+                'estado' => 'activo',
+            ],
+            [
+                'nombre' => 'Asistente de ingenieria',
+                'nivel_riesgo' => 'bajo',
+                'salario_minimo' => 115000,
+                'salario_maximo' => 225000,
+                'estado' => 'activo',
+            ],
+            [
+                'nombre' => 'Maestro constructor',
+                'nivel_riesgo' => 'alto',
+                'salario_minimo' => 115000,
+                'salario_maximo' => 225000,
+                'estado' => 'activo',
+            ],
+            [
+                'nombre' => 'Ingeniero de software',
+                'nivel_riesgo' => 'bajo',
+                'salario_minimo' => 115000,
+                'salario_maximo' => 225000,
+                'estado' => 'activo',
+            ],
+            [
+                'nombre' => 'Compilador',
+                'nivel_riesgo' => 'alto',
+                'salario_minimo' => 115000,
+                'salario_maximo' => 225000,
+                'estado' => 'activo',
+            ],
         ];
         foreach ($puestos as $puesto) {
             App\Puestos::create($puesto);
         }
+        factory(App\Puestos::class, 30)->create();
 
         User::create([
             'name' => 'admin',
@@ -176,5 +339,32 @@ class DatabaseSeeder extends Seeder
             'role' => 'admin',
             'password' => Hash::make('adminpassword'),
         ]);
+
+        factory(App\User::class, 50)->create()->each(function ($user) {
+            factory(App\Candidatos::class)->create([
+                'nombre' => $user->name,
+                'user_id' => $user->id,
+                'departamento_id' => DB::table('departamentos')->inRandomOrder()->first()->id,
+            ])->each(function ($candidate) {
+                $competenciaId = DB::table('competencias')->inRandomOrder()->first()->id;
+                $candidate->competencias()->sync([$competenciaId]);
+
+                $capa = DB::table('capacitaciones')->inRandomOrder()->first()->id;
+                $candidate->capacitaciones()->sync([$capa]);
+
+                $i = DB::table('idiomas')->inRandomOrder()->first()->id;
+                $candidate->idiomas()->sync([$i]);
+
+                $puesto = DB::table('puestos')->inRandomOrder()->first()->id;
+                $candidate->puestos()->sync([$puesto]);
+            });
+        });
+
+        App\Candidatos::all()->each(function ($candidato) {
+            factory(App\ExperienciaLaboral::class)->create([
+                'candidato_id' => $candidato->id,
+                'puesto_ocupado_id' => DB::table('puestos')->inRandomOrder()->first()->id,
+            ]);
+        });
     }
 }

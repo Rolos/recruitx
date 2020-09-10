@@ -21,8 +21,36 @@ $factory->define(User::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
-        'email_verified_at' => now(),
-        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        'role' => 'candidate',
+        'password' => Hash::make('candidatepassword'),
         'remember_token' => Str::random(10),
+    ];
+});
+
+$factory->define(\App\Candidatos::class, function (Faker $faker) {
+    return [
+        'cedula' => $faker->numerify('###########'),
+        'telefono' => $faker->numerify('##########'),
+        'salario_al_que_aspira' => $faker->numberBetween(10000,200000),
+        'recomendado_por' => $faker->name,
+    ];
+});
+
+$factory->define(\App\Puestos::class, function (Faker $faker) {
+    return [
+        'nombre' => $faker->jobTitle,
+        'nivel_riesgo' => $faker->randomElement(['alto', 'medio', 'bajo']),
+        'salario_minimo' => $faker->numberBetween(10000,50000),
+        'salario_maximo' => $faker->numberBetween(50000,200000),
+        'estado' => 'activo',
+    ];
+});
+
+$factory->define(\App\ExperienciaLaboral::class, function (Faker $faker) {
+    return [
+        'empresa' => $faker->company,
+        'fecha_desde' => $faker->dateTimeThisDecade(),
+        'fecha_hasta' => $faker->dateTimeThisYear(),
+        'salario' => $faker->numberBetween(10000,50000),
     ];
 });

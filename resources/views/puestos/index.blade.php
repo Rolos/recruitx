@@ -58,12 +58,12 @@
                     @elsecan('candidate-stuff')
                         <td class="px-0">
                             @if(in_array($puesto->id, $puestos_aplicados))
-                                <a href="{{route('candidates.position.remove', ['id' => Auth::user()->candidato->id, 'puestoId' => $puesto->id])}}" class="btn btn-danger">
-                                    Remover
+                                <a href="{{route('candidates.position.remove', ['id' => Auth::user()->candidato->id, 'puestoId' => $puesto->id])}}" class="btn btn-danger" title="Remover aplicacion">
+                                    <i class="fas fa-user-minus"></i>
                                 </a>
                             @else
-                                <a href="{{route('candidates.position.apply', ['id' => Auth::user()->candidato->id, 'puestoId' => $puesto->id])}}" class="btn btn-primary">
-                                    Aplicar
+                                <a href="{{route('candidates.position.apply', ['id' => Auth::user()->candidato->id, 'puestoId' => $puesto->id])}}" class="btn btn-primary" title="Aplicar">
+                                    <i class="fas fa-user-plus"></i>
                                 </a>
                             @endif
                         </td>

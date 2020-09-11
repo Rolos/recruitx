@@ -32,15 +32,18 @@
   }
 }
 
-.link-icon {
-  font-size: 1.3em;
+a {
   color: $orange-brand;
   &:hover, &:active {
     color: $orange !important;
   }
 }
 
-.form-control:focus {
+.link-icon {
+  font-size: 1.3em;
+}
+
+.form-control:focus, .custom-select:focus {
   border-color: $orange;
   box-shadow: 0 0 0 0.2rem rgba(248, 151, 29, 0.25);
 }
@@ -62,4 +65,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+}
+
+.delete-button-trick {
+  bottom: 0;
+  left: 120px;
 }

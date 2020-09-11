@@ -29,14 +29,12 @@
   &:hover, &:active {
     background-color: $orange;
     border-color: $orange;
+    color: white;
   }
 }
 
 a {
   color: $orange-brand;
-  &:hover, &:active {
-    color: $orange !important;
-  }
 }
 
 .link-icon {

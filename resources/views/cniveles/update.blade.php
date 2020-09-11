@@ -21,6 +21,6 @@
             <label for="descripcion">Descripcion</label>
             <textarea id="descripcion" type="text" name="descripcion" class="@error('descripcion') is-invalid @enderror form-control">{{$nivel->descripcion}}</textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Actualizar</button>
+        <button type="submit" class="btn btn-primary btn-lg">Actualizar</button>
     </form>
 @endsection

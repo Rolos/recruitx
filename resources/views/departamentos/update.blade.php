@@ -1,8 +1,14 @@
 @extends('layouts.app')
 
-@section('title', 'Editar Departamentos')
+@section('title', 'Actualizar Departamento')
 
 @section('content')
+    <div class="row mt-2 mb-4">
+        <div class="col-12">
+            <h2>Actualizar Departamento</h2>
+        </div>
+    </div>
+
     <form method="POST" action="{{route('departamentos.update', $departamento)}}">
         @method('PUT')
         @csrf
@@ -13,8 +19,8 @@
         </div>
         <div class="form-group">
             <label for="descripcion">Descripcion</label>
-            <input id="descripcion" type="text" name="descripcion" class="@error('descripcion') is-invalid @enderror form-control" value="{{$departamento->descripcion}}">
+            <textarea id="descripcion" type="text" name="descripcion" class="@error('descripcion') is-invalid @enderror form-control">{{$departamento->descripcion}}</textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Actualizar</button>
+        <button type="submit" class="btn btn-primary btn-lg">Actualizar</button>
     </form>
 @endsection

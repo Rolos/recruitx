@@ -3,6 +3,12 @@
 @section('title', 'Crear Niveles de Capacitacion')
 
 @section('content')
+    <div class="row mt-2 mb-4">
+        <div class="col-12">
+            <h2>Crear Niveles de Capacitacion</h2>
+        </div>
+    </div>
+
     <form method="POST" action="{{route('cniveles.store')}}">
         @csrf
         @include('includes.errors')
@@ -12,8 +18,8 @@
         </div>
         <div class="form-group">
             <label for="descripcion">Descripcion</label>
-            <input id="descripcion" type="text" name="descripcion" class="@error('descripcion') is-invalid @enderror form-control">
+            <textarea id="descripcion" type="text" name="descripcion" class="@error('descripcion') is-invalid @enderror form-control"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Crear</button>
+        <button type="submit" class="btn btn-primary btn-lg">Crear</button>
     </form>
 @endsection

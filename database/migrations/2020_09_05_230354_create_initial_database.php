@@ -18,24 +18,28 @@ class CreateInitialDatabase extends Migration
             $table->string('descripcion');
             $table->string('estado');
             $table->timestamps();
+            $table->softDeletes();
         });
         Schema::create('idiomas', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
             $table->string('estado');
             $table->timestamps();
+            $table->softDeletes();
         });
         Schema::create('departamentos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
             $table->string('descripcion')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
         Schema::create('niveles_capacitaciones', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
             $table->string('descripcion')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
         Schema::create('puestos', function (Blueprint $table) {
             $table->id();
@@ -45,6 +49,7 @@ class CreateInitialDatabase extends Migration
             $table->integer('salario_maximo');
             $table->string('estado');
             $table->timestamps();
+            $table->softDeletes();
         });
         Schema::create('capacitaciones', function (Blueprint $table) {
             $table->id();
@@ -54,6 +59,7 @@ class CreateInitialDatabase extends Migration
             $table->date('fecha_hasta');
             $table->string('institucion');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('nivel_id')->references('id')->on('niveles_capacitaciones');
         });
@@ -68,6 +74,7 @@ class CreateInitialDatabase extends Migration
             $table->string('recomendado_por');
             $table->boolean('es_empleado')->default(false);
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('departamento_id')->references('id')->on('departamentos');
             $table->foreign('user_id')->references('id')->on('users');
@@ -81,6 +88,7 @@ class CreateInitialDatabase extends Migration
             $table->date('fecha_hasta');
             $table->integer('salario');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('candidato_id')->references('id')->on('candidatos');
             $table->foreign('puesto_ocupado_id')->references('id')->on('puestos');
@@ -96,6 +104,7 @@ class CreateInitialDatabase extends Migration
             $table->integer('salario_mensual');
             $table->string('estado');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('departamento_id')->references('id')->on('departamentos');
             $table->foreign('puesto_id')->references('id')->on('puestos');

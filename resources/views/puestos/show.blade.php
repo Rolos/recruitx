@@ -64,7 +64,7 @@
                                 <span class="hired" title="Contratado">
                                     <i class="fas fa-check"></i>
                                 </span>
-                            @else
+                            @elseif ($puesto->estado == 'activo')
                                 <a href="{{route('empleados.create.candidate', ['candidatoId' => $candidato->id, 'puestoId' => $puesto->id])}}" class="btn btn-danger" title="Contratar">
                                     <i class="fas fa-user-plus"></i>
                                 </a>

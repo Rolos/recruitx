@@ -14,11 +14,11 @@
         <div class="card-body">
             <h5 class="card-title">Datos B&aacute;sicos</h5>
             <ul class="list-group list-group-horizontal">
-                <li class="list-group-item"><strong>Cedula:</strong> {{$candidato->cedula}}</li>
-                <li class="list-group-item"><strong>Telefono:</strong> {{$candidato->telefono}}</li>
-                <li class="list-group-item"><strong>Departamento:</strong> {{$candidato->departamento->nombre}}</li>
-                <li class="list-group-item"><strong>Salario al que aspira:</strong> {{$candidato->salario_al_que_aspira}}</li>
-                <li class="list-group-item"><strong>Recomendado por:</strong> {{$candidato->recomendado_por}}</li>
+                <li class="list-group-item"><strong>Cedula:</strong> <br /> {{$candidato->cedula}}</li>
+                <li class="list-group-item"><strong>Telefono:</strong> <br /> {{$candidato->telefono}}</li>
+                <li class="list-group-item"><strong>Departamento:</strong> <br /> {{$candidato->departamento->nombre}}</li>
+                <li class="list-group-item"><strong>Salario al que aspira:</strong> <br /> {{$candidato->salario_al_que_aspira}}</li>
+                <li class="list-group-item"><strong>Recomendado por:</strong> <br /> {{$candidato->recomendado_por}}</li>
             </ul>
         </div>
     </div>

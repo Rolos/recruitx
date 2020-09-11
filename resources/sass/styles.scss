@@ -32,6 +32,14 @@
   }
 }
 
+.link-icon {
+  font-size: 1.3em;
+  color: $orange-brand;
+  &:hover, &:active {
+    color: $orange !important;
+  }
+}
+
 .form-control:focus {
   border-color: $orange;
   box-shadow: 0 0 0 0.2rem rgba(248, 151, 29, 0.25);

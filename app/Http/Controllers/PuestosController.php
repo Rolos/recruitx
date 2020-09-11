@@ -25,7 +25,7 @@ class PuestosController extends Controller
             ? App\Puestos::paginate(20)
             : App\Puestos::where('estado', 'activo')->paginate(20);
         $puestos_aplicados = [];
-        if (Auth::user()->can('candidate-stuff')) {
+        if (Auth::user()->can('candidate-stuff') && Auth::user()->candidato !== null) {
             $puestos_aplicados = Auth::user()->candidato->puestos->map(function ($item) {
                 return $item->id;
             })->toArray();

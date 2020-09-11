@@ -57,14 +57,18 @@
                         </td>
                     @elsecan('candidate-stuff')
                         <td class="px-0">
-                            @if(in_array($puesto->id, $puestos_aplicados))
-                                <a href="{{route('candidates.position.remove', ['id' => Auth::user()->candidato->id, 'puestoId' => $puesto->id])}}" class="btn btn-danger" title="Remover aplicacion">
-                                    <i class="fas fa-user-minus"></i>
-                                </a>
+                            @if (Auth::user()->candidato !== null)
+                                @if(in_array($puesto->id, $puestos_aplicados))
+                                    <a href="{{route('candidates.position.remove', ['id' => Auth::user()->candidato->id, 'puestoId' => $puesto->id])}}" class="btn btn-danger" title="Remover aplicacion">
+                                        <i class="fas fa-user-minus"></i>
+                                    </a>
+                                @else
+                                    <a href="{{route('candidates.position.apply', ['id' => Auth::user()->candidato->id, 'puestoId' => $puesto->id])}}" class="btn btn-primary" title="Aplicar">
+                                        <i class="fas fa-user-plus"></i>
+                                    </a>
+                                @endif
                             @else
-                                <a href="{{route('candidates.position.apply', ['id' => Auth::user()->candidato->id, 'puestoId' => $puesto->id])}}" class="btn btn-primary" title="Aplicar">
-                                    <i class="fas fa-user-plus"></i>
-                                </a>
+                                <a class="link-icon" href="{{route('candidatos.create')}}" title="Crea tu resume para poder aplicar"><i class="fas fa-exclamation"></i></a>
                             @endif
                         </td>
                     @endcan

@@ -30,8 +30,31 @@ class EmpleadosController extends Controller
             $query->where('fecha_ingreso', '<=', $request->get('final_date'));
         }
         $request->flash();
-        $empleados = $query->paginate(20);
-        return view('empleados.index', ['empleados' => $empleados]);
+
+        if ($request->has('csv_download')) {
+            $filename = "empleados.csv";
+            $empleados = $query->get();
+            $handle = fopen($filename, 'w+');
+            fputcsv($handle, ['Cedula', 'Nombre', 'Fecha de Ingreso', 'Departamento', 'Puesto', 'Salario Mensual', 'Estado']);
+            foreach($empleados as $empleado) {
+                fputcsv($handle, [
+                    $empleado->cedula,
+                    $empleado->nombre,
+                    $empleado->fecha_ingreso,
+                    $empleado->departamento->nombre,
+                    $empleado->puesto->nombre,
+                    $empleado->salario_mensual,
+                    $empleado->estado
+                ]);
+            }
+            fclose($handle);
+            return response()
+                ->download($filename, $filename, ['Content-Type' => 'text/csv'])
+                ->deleteFileAfterSend();
+        } else {
+            $empleados = $query->paginate(20);
+            return view('empleados.index', ['empleados' => $empleados]);
+        }
     }
 
     /**

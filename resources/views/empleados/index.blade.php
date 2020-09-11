@@ -12,7 +12,7 @@
         </div>
     </div>
 
-    <form class="form-inline mb-4">
+    <form class="form-inline mb-4 position-relative">
         <label for="initial_date" class="mr-2">Fecha Inicial</label>
         <input type="date" class="form-control mr-3" id="initial_date" name="initial_date" value="{{ old('initial_date') }}">
 
@@ -20,6 +20,10 @@
         <input type="date" class="form-control mr-3" id="final_date" name="final_date" value="{{ old('final_date') }}">
 
         <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+
+        <button type="submit" name="csv_download" class="btn btn-secondary position-absolute csv_download">
+            <i class="fas fa-file-download"></i> Descargar CSV
+        </button>
     </form>
 
     <div class="row">

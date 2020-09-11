@@ -15,6 +15,10 @@
   }
 }
 
+.dropdown-item.active, .dropdown-item:active {
+  background-color: $purple-brand;
+}
+
 .btn-secondary, .page-item.active .page-link {
   background-color: $orange-brand;
   border-color: $orange-brand;

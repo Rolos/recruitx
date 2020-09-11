@@ -64,28 +64,33 @@
                 </div>
             </div>
             <div class="col-9">
-                <div class="form-row align-items-center">
-                    <div class="col-3">
-                        <input type="text" class="form-control mb-2" placeholder="Nombre" name="nombre" value="{{ old('nombre') }}">
-                    </div>
-                    <div class="col-3">
-                        <input type="text" class="form-control mb-2" placeholder="Cedula" name="cedula" value="{{ old('cedula') }}">
-                    </div>
-                    <div class="col-3">
-                        <input type="text" class="form-control mb-2" placeholder="Telefono" name="telefono" value="{{ old('telefono') }}">
-                    </div>
-                    <div class="col-auto">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="row mt-2 mb-3">
+                    <div class="col-10">
+                        <h2>Candidatos</h2>
                     </div>
                 </div>
-                <table class="table">
+                <div class="form-row align-items-center mb-3">
+                    <div class="col-3">
+                        <input type="text" class="form-control" placeholder="Nombre" name="nombre" value="{{ old('nombre') }}">
+                    </div>
+                    <div class="col-3">
+                        <input type="text" class="form-control" placeholder="Cedula" name="cedula" value="{{ old('cedula') }}">
+                    </div>
+                    <div class="col-3">
+                        <input type="text" class="form-control" placeholder="Telefono" name="telefono" value="{{ old('telefono') }}">
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+                <table class="table table-hover">
                     <thead>
                     <tr>
                         <th scope="col">Cedula</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Telefono</th>
                         <th scope="col">Departamento</th>
-                        <th scope="col">Salario al que aspira</th>
+                        <th scope="col">Salario deseado</th>
                         <th scope="col">Recomendado por</th>
                     </tr>
                     </thead>

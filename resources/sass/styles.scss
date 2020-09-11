@@ -10,21 +10,21 @@
   background-color: $purple-brand;
   border-color: $purple-brand;
   &:hover, &:active {
-    background-color: $purple;
-    border-color: $purple;
+    background-color: $purple !important;
+    border-color: $purple !important;
   }
 }
 
-.btn-secondary {
+.btn-secondary, .page-item.active .page-link {
   background-color: $orange-brand;
   border-color: $orange-brand;
   &:hover, &:active {
-    background-color: $orange;
-    border-color: $orange;
+    background-color: $orange !important;
+    border-color: $orange !important;
   }
 }
 
-.btn-link {
+.btn-link, .page-link {
   color: $orange-brand;
   &:hover, &:active {
     background-color: $orange;
@@ -39,4 +39,19 @@
 
 .pattern-background {
   background: rgba(117, 78, 149, 0.5) url('/img/pattern2.png');
+}
+
+.w-50px {
+  width: 50px;
+}
+
+.hired {
+  width: 30px;
+  height: 30px;
+  background-color: #2d995b;
+  color: white;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }

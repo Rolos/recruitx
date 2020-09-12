@@ -1,6 +1,6 @@
 ## RecruitX
 
-This project is the result of about 25 hours of intense work in order to exonerate a subject in college. I hope it works 😉
+Recruitment and job applications platform. This is a college project 😉
 
 #### Built with
 
